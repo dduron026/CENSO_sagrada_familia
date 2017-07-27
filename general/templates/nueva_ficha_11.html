@@ -51,19 +51,45 @@
 <div class="box box-primary with-border">
         <div class="box-body">
         <p class="pull-right">Fecha: {% now 'd-m-Y' %}</p>
-        <h5 class="text-center sub-style">B. INFORMACION LABORAL  </h5><hr>        
-          
-          <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
+        <h5 class="text-center sub-style">C. ARRAIGO </h5><hr>
+
+      <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
          
             
             <div class="row">
               <div class="col-sm-5">
-                  {{form1.hijos|bootstrap_horizontal:'col-xs-5'}}
+                  {{form1.prestamos_otros|bootstrap_horizontal:'col-xs-5'}}
               </div>
                <div class="col-sm-5">
-                  {{form1.cantidad_hijos|bootstrap_horizontal:'col-xs-5'}}
+                  {{form1.tipo_institucion_prestamos|bootstrap_horizontal:'col-xs-5'}}
               </div>              
-            </div>             
+            </div>
+
+        <p class="page-header"></p>
+        <p class="text-center sub-style">
+        INGRESAR PRESTAMOS
+        </p>
+
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button type="button" class="btn btn-default pull-left" id='agregar_prestamo'>agregar Préstamo</button>
+          <br><br><br>
+        </div>
+      </div>
+
+
+
+      <!-- en este div se ingresan los otros con jquery -->
+      <div id="otros_prestamos"> </div>
+
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success pull-left" id='btn-actualizar'>guardar Préstamo</button>
+      </div>   
+
+
+         
 
                
 
@@ -74,7 +100,7 @@
                <div class="col-sm-5">
               </div>              
             </div> 
-            <hr>
+            
                 
 
 
@@ -86,8 +112,7 @@
 
 
         </div>                                   
-           
-                 <!--  <button type="reset" class="btn btn-default btn-md"><i class="glyphicon glyphicon-repeat"></i> Limpiar</button>      -->                          
+                                     
                
       </form>
 
@@ -97,5 +122,18 @@
 </div> 
 
 
+
+
+<script>
+
+$(document).ready(function(){
+
+
+
+});  
+
+</script>
+
+
 {% endblock %}  
-     <!-- /.content -->
+     <!-- /.content

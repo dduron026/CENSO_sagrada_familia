@@ -51,19 +51,15 @@
 <div class="box box-primary with-border">
         <div class="box-body">
         <p class="pull-right">Fecha: {% now 'd-m-Y' %}</p>
-        <h5 class="text-center sub-style">B. INFORMACION LABORAL  </h5><hr>        
+        <h5 class="text-center sub-style">D: REMESAS </h5><hr>        
           
           <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
          
             
-            <div class="row">
-              <div class="col-sm-5">
-                  {{form1.hijos|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                  {{form1.cantidad_hijos|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div>             
+                
+           
+
+                        
 
                
 

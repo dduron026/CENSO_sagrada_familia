@@ -130,6 +130,8 @@ class FichaCenso(models.Model):
 	cantidad_personas = models.IntegerField(db_column='CantidadPersonas', blank=True, null=True)  # Field name made lowercase.
 	numero_ninos = models.IntegerField(db_column='NumeroNinos', blank=True, null=True)  # Field name made lowercase.
 	numero_adolescentes = models.IntegerField(db_column='NumeroAdolescentes', blank=True, null=True)  # Field name made lowercase.
+	
+	# VISTA 10
 	mayores_edad = models.IntegerField(db_column='MayoresEdad', blank=True, null=True)  # Field name made lowercase.
 	mayores_a_60 = models.IntegerField(db_column='Mayoresa60', blank=True, null=True)  # Field name made lowercase.
 	anos_afiliacion = models.IntegerField(db_column='AnosAfiliacion', blank=True, null=True)  # Field name made lowercase.
@@ -138,10 +140,14 @@ class FichaCenso(models.Model):
 	cod_filial_visita = models.ForeignKey('Filiales', models.DO_NOTHING, db_column='CodFilialVisita',  related_name='CodFilialVisita_Filiales', blank=True, null=True)  # Field name made lowercase.
 	cursos_capacitaciones = models.NullBooleanField(db_column='CursosCapacitaciones')  # Field name made lowercase.
 	asambleas_sectoriales = models.NullBooleanField(db_column='AsambleasSectoriales')  # Field name made lowercase.
+	
+	# VISTA 11
 	prestamos_otros = models.NullBooleanField(db_column='PrestamosOtros')  # Field name made lowercase.
 	tipo_institucion_prestamos = models.CharField(db_column='TipoInstitucionPrestamos', max_length=1, blank=True, null=True)  # Field name made lowercase.
+	
+	# VISTA 12
 	destino_pendiente_pago = models.CharField(db_column='DestinoPendientePago', max_length=1, blank=True, null=True)  # Field name made lowercase.
-	otros_desinto = models.CharField(db_column='OtrosDesinto', max_length=100, blank=True, null=True)  # Field name made lowercase.
+	otros_destino = models.CharField(db_column='OtrosDesinto', max_length=100, blank=True, null=True)  # Field name made lowercase.
 	cuenta_ahorro_otro = models.NullBooleanField(db_column='CuentaAhorroOtro')  # Field name made lowercase.
 	nombre_institucion_ahorro = models.CharField(db_column='NombreInstitucionAhorro', max_length=100, blank=True, null=True)  # Field name made lowercase.
 	tipo_cuenta_ahorro = models.CharField(db_column='TipoCuentaAhorro', max_length=1, blank=True, null=True)  # Field name made lowercase.
@@ -150,10 +156,13 @@ class FichaCenso(models.Model):
 	cantidad_tarjetas = models.IntegerField(db_column='CantidadTarjetas', blank=True, null=True)  # Field name made lowercase.
 	nombre_institucion_tarjeta = models.CharField(db_column='NombreInstitucionTarjeta', max_length=100, blank=True, null=True)  # Field name made lowercase.
 	tipo_tarjeta = models.CharField(db_column='TipoTarjeta', max_length=1, blank=True, null=True)  # Field name made lowercase.
+	
+
+	# VISTA 13
 	limite_tarjeta = models.CharField(db_column='LimiteTarjeta', max_length=1, blank=True, null=True)  # Field name made lowercase.
 	tipo_compra_casa = models.CharField(db_column='TipoCompraCasa', max_length=1, blank=True, null=True)  # Field name made lowercase.
 	cuota_casa_mensual = models.DecimalField(db_column='CuotaCasaMensual', max_digits=17, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-	nombre_insitucion_casa = models.CharField(db_column='NombreInsitucionCasa', max_length=100, blank=True, null=True)  # Field name made lowercase.
+	nombre_institucion_casa = models.CharField(db_column='NombreInsitucionCasa', max_length=100, blank=True, null=True)  # Field name made lowercase.
 	sistema_cable = models.NullBooleanField(db_column='SistemaCable')  # Field name made lowercase.
 	internet = models.NullBooleanField(db_column='Internet')  # Field name made lowercase.
 	remesas_extrajero = models.NullBooleanField(db_column='RemesasExtrajero')  # Field name made lowercase.

@@ -54,6 +54,16 @@ NIVEL_INGRESO_CONYUGUE = (
 	
 )
 
+PAPEL_CASA = (
+	
+	('', '--------'),
+	('A', 'Hija(o) '),
+	('B', 'Madre/padre de familia'),
+	('C', 'Abuela'),
+	('D', 'Otro'),
+	
+)
+
 # bit
 CONYUGUE = (
 	(True, 'Si'),
@@ -86,6 +96,61 @@ TIENE_HIJOS = (
 	(False, 'No'),
 	)
 
+HIJOS_AFILIADOS = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+
+POSEE_VEHICULO = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+CURSOS = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+ASAMBLEAS = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+PRESTAMOS_OTROS = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+CUENTA_AHORRO_OTRO = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+TARJETA_CREDITO = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+
+SISTEMA_CABLE = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+
+INTERNET = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+
+REMESAS = (
+	(True, 'Si'),
+	(False, 'No'),
+	)
+
+
 LUGAR_TRABAJO = (
 
 	('', '------'),
@@ -98,8 +163,72 @@ LUGAR_TRABAJO = (
 TIPO_CONTRATO = (
 	('','------'),
 	('A','Permanente'),
-	('A','Temporal'),
-	('A','Por horas'),
+	('B','Temporal'),
+	('C','Por horas'),
+	)
+
+TIPO_CASA = (
+	('','------'),
+	('A','Propia'),
+	('B','Alquilada'),
+	('C','Familiar'),
+	)
+
+INSTITUCION_OTROS_PRESTAMOS = (
+	('','---------'),
+	('A','Bancos'),
+	('B','Cooperativas'),
+	('C','Sistema de prevención'),
+	('D','Financieras'),
+	('E','OPDF'),
+	('F','Prestamistas'),
+	)
+
+
+OTROS_PRESTAMOS_DESTINO = (
+	('','---------'),
+	('A','Compra de casa'),
+	('B','Compra de Terreno'),
+	('C','Compra de Vehículo'),
+	('D','Viajes'),
+	('E','Consumo'),
+	('F','Salud'),
+	('G','Consolidación de deudas tarjetas de crédito'),
+	('H','Gastos educativos hijos '),
+	)
+
+TIPO_CUENTA_AHORRO = (
+	('','------'),
+	('A','DPF'),
+	('B','Cuenta Retirable'),
+	('C','Fondo de pensiones'),
+	('D','Cuenta de cheques'),
+	('E','Cuenta de ahorro programado'),
+	)
+
+TIPO_TARJETA_CREDITO = (
+	('','------'),
+	('A','Clásica'),
+	('B','Oro'),
+	('C','Platinum'),
+	('D','Otra'),	
+	)
+
+LIMITE_TARJETA = (
+	('','------'),
+	('A','Hasta $400.00'),
+	('B','De $401 a $800'),
+	('C','De $800 a $1200'),
+	('D','De $1201 a $3,000'),	
+	('E','$3,000 en adelante'),	
+	)
+
+TIPO_COMPRA_CASA = (
+	('','------'),
+	('A','Propia'),
+	('B','Alquilada'),
+	('C','Familiar'),
+	('D','Pagándola'),	
 	)
 
 class FichaCensoForm(ModelForm):
@@ -117,6 +246,24 @@ class FichaCensoForm(ModelForm):
 	nivel_ingreso = forms.ChoiceField(choices=NIVEL_INGRESO, label='Nivel de ingreso', required=False)
 	nivel_ingreso_conyuge = forms.ChoiceField(choices=NIVEL_INGRESO_CONYUGUE, label='Nivel de ingreso cónyugue', required=False)
 	hijos = forms.ChoiceField(widget=RadioSelect, choices=TIENE_HIJOS, label='Tiene hijos', required=False)
+	papel_casa = forms.ChoiceField(choices=PAPEL_CASA, label='Papel en la casa', required=False)
+	tipo_casa = forms.ChoiceField(choices=TIPO_CASA, label='Tipo Casa', required=False)
+	hijos_afiliados = forms.ChoiceField(widget=RadioSelect, choices=HIJOS_AFILIADOS, label='Están afiliados sus hijos?', required=False)
+	vehiculo = forms.ChoiceField(widget=RadioSelect, choices=POSEE_VEHICULO, label='Posee vehículo?', required=False)
+	cursos_capacitaciones = forms.ChoiceField(widget=RadioSelect, choices=CURSOS, label='Cursos y capacitaciones', required=False)
+	asambleas_sectoriales = forms.ChoiceField(widget=RadioSelect, choices=ASAMBLEAS, label='Asambleas sectoriales', required=False)
+	prestamos_otros = forms.ChoiceField(widget=RadioSelect, choices=PRESTAMOS_OTROS, label='Préstamo con otra institución', required=False)
+	tipo_institucion_prestamos = forms.ChoiceField(choices=INSTITUCION_OTROS_PRESTAMOS, label='Con qué otra institución tiene Préstamo', required=False)
+	destino_pendiente_pago = forms.ChoiceField(choices=OTROS_PRESTAMOS_DESTINO, label='los Préstamos pendientes de pago fueron para', required=False)
+	cuenta_ahorro_otro = forms.ChoiceField(widget=RadioSelect, choices=CUENTA_AHORRO_OTRO, label='Tiene cuenta de ahorro en otra institución', required=False)
+	tipo_cuenta_ahorro = forms.ChoiceField(choices=TIPO_CUENTA_AHORRO, label='Qué tipo de cuenta de ahorro mantiene con esas instituciones', required=False)
+	tarjeta_credito = forms.ChoiceField(widget=RadioSelect, choices=TARJETA_CREDITO, label='Tiene tarjeta de crédito', required=False)
+	tipo_tarjeta = forms.ChoiceField(choices=TIPO_TARJETA_CREDITO, label='Tipo de tarjeta', required=False)
+	limite_tarjeta = forms.ChoiceField(choices=LIMITE_TARJETA, label='Limite de tarjeta', required=False)
+	tipo_compra_casa = forms.ChoiceField(choices=TIPO_COMPRA_CASA, label='La casa donde usted vive es:', required=False)
+	sistema_cable = forms.ChoiceField(widget=RadioSelect, choices=SISTEMA_CABLE, label='Tiene sistema de cable en hogar', required=False)
+	internet = forms.ChoiceField(widget=RadioSelect, choices=INTERNET, label='Tiene internet en su hogar', required=False)
+	remesas_extrajero = forms.ChoiceField(widget=RadioSelect, choices=REMESAS, label='Recibe remesas del extranjero', required=False)
 	
 	class Meta:
 		model = FichaCenso
@@ -131,7 +278,13 @@ class FichaCensoForm(ModelForm):
 		'no_casa_empresa':('Número de casa empresa'),'telefono_fijo_empresa': ('Teléfono fijo empresa'),
 		'telefono_otro_empresa': ('Otro teléfono'),'correo_electronico_empresa': ('Correo electrónico empresa'),
 		'negocio_especificar':('Tipo de Negocio'), 'antiguedad_negocio_meses':('Antigüedad negocio en meses'),
-		'num_empleados':('Número de empleados'),}
+		'num_empleados':('Número de empleados'), 'cantidad_vehiculos': ('Cantidad de vehículos'),
+		'cantidad_personas': ('Cantidad de personas que viven en la casa'),
+		'numero_ninos': ('Cantidad de Niños'), 'numero_adolescentes': ('Cantidad de adololescentes'),
+		'mayores_edad': ('Cantidad de mayores de edad'), 'mayores_a_60': ('Cantidad de mayores a 60'),
+		'anos_afiliacion': ('cuantos años tiene de ser afiliado'), 'nombre_institucion_ahorro': ('Nombre institución de ahorro'),
+		'otros_tipo_cuenta':('Otras (especifique)'),'nombre_institucion_tarjeta':('Con que institución(es) tiene tarjeta de crédito'),
+		'nombre_institucion_casa': ('Banco'),}
 
 
 

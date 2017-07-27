@@ -51,80 +51,60 @@
 <div class="box box-primary with-border">
         <div class="box-body">
         <p class="pull-right">Fecha: {% now 'd-m-Y' %}</p>
-        <h5 class="text-center sub-style">B. INFORMACION LABORAL  </h5><hr>        
+        <h5 class="text-center sub-style">C: ARRAIGO  </h5><hr>        
           
-          <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' >
-            {% csrf_token %}
+          <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
          
-            <div class="row">
-              <div class="col-sm-5">
-              {{form1.trabaja_actualmente|bootstrap_horizontal:'col-xs-5'}}
-              </div>                            
-            </div> 
-
-            <div class="row">
-              <div class="col-sm-5">
-                  {{form1.lugar_de_trabajo|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                  {{form1.tipo_contratacion|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div>
-
-            <div class="row">
-              <div class="col-sm-5">
-                  {{form1.antiguedad_meses|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                  {{form1.nombre_empresa|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div>
-
-             <div class="row">
-              <div class="col-sm-5">
-                  {{form1.departamento_o_seccion|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                  {{form1.cargo|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div>            
-
-            <div class="row">
-              <div class="col-sm-8">
-                  <h5><b>Dirección Laboral:</b> </h5>
-              </div>
-                           
-            </div>
-
-            <div class="row">
-              <div class="col-sm-5">
-                  {{form1.cod_departamento_empresa|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-
-              <div class="col-sm-5">
-               <label for="id_cod_municipio_empresa" class="col-xs-5 control-label">Municipio Empresa</label>
-                   <div class="col-xs-7">
-                      <select class="form-control" id="id_cod_municipio_empresa" name="cod_municipio" required>
-                         <option value="">---------------</option>
-                      </select>
-                   </div>                 
-              </div>
-                            
-            </div>
-
-            <div class="row">
-              <div class="col-sm-5">
-                  {{form1.barrio_o_colonia_empresa|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                  {{form1.calle_empresa|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div>
-
-             
             
-    
-         
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.destino_pendiente_pago|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                  {{form1.otros_destino|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.cuenta_ahorro_otro|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                  {{form1.nombre_institucion_ahorro|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.tipo_cuenta_ahorro|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                  {{form1.otros_tipo_cuenta|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.tarjeta_credito|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                  {{form1.cantidad_tarjetas|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.nombre_institucion_tarjeta|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                  {{form1.tipo_tarjeta|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+           
+
+                        
+
+               
 
              <!-- formato correcto -->
             <div class="row">
@@ -139,7 +119,7 @@
 
 
               <div class="col-sm-12">
-                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button> 
+                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button>
                              
               </div>
 
@@ -154,26 +134,6 @@
      </div>
                 
 </div> 
-
-<script>
-   
-    $('#id_cod_departamento_empresa').change(function(){
-      $('#id_cod_municipio_empresa').empty();
-      $('#id_cod_municipio_empresa').append("<option value=''>---------------</option>");
-       cod_departamento_empresa = $(this).val()
-       $.ajax({
-          type: "GET",
-          data: { cod_departamento_empresa: cod_departamento_empresa},
-          url: "{% url 'ajax3' %}",
-          success: function(response){
-           $.each(response, function(key, val){
-              $('#id_cod_municipio_empresa').append("<option value="+val.cod_municipio+">" + val.desc_municipio + "</option>");
-            });
-              $('#id_cod_municipio_empresa').trigger("chosen:updated");
-      }
-   });
-});
- </script>
 
 
 {% endblock %}  
