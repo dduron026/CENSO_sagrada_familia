@@ -41,21 +41,19 @@ def nueva_ficha(request):
 
 def nueva_ficha_2(request, cod_censo):
 	ficha = FichaCenso.objects.get(pk=cod_censo)
-
+	
 	try:
-		if request.method == 'GET':
-			form1 = FichaCensoForm(instance=ficha)
-		else:
-			form1 = FichaCensoForm(request.POST, instance=ficha)
-
-		ficha = FichaCenso.objects.get(cod_censo=cod_censo)
-		ficha.nivel_educativo = None if request.POST.get('nivel_educativo') == '' else request.POST.get('nivel_educativo')
-		ficha.cod_profesion_oficio = ProfesionOficio.objects.get(pk=request.POST.get('cod_profesion_oficio'))
-		ficha.cod_departament_domicilio = Departamentos.objects.get(pk=request.POST.get('cod_departament_domicilio'))
-		ficha.cod_municipio_domicilio = Municipios.objects.get(pk=request.POST.get('cod_municipio'))
+		if request.POST:
+			form1 = FichaCensoForm()
+			ficha = FichaCenso.objects.get(cod_censo=cod_censo)
+			ficha.nivel_educativo = None if request.POST.get('nivel_educativo') == '' else request.POST.get('nivel_educativo')
+			ficha.cod_profesion_oficio = ProfesionOficio.objects.get(pk=request.POST.get('cod_profesion_oficio'))
+			ficha.cod_departament_domicilio = Departamentos.objects.get(pk=request.POST.get('cod_departament_domicilio'))
+			ficha.cod_municipio_domicilio = Municipios.objects.get(pk=request.POST.get('cod_municipio'))
 		
-		ficha.save()
+			ficha.save()
 		return redirect(reverse('nueva_ficha_3', kwargs={'cod_censo': ficha.cod_censo}))
+		
 	except Exception as e:
 		print e
 
@@ -73,24 +71,23 @@ def nueva_ficha_3(request, cod_censo):
 			form1 = FichaCensoForm(instance=ficha)
 		else:
 			form1 = FichaCensoForm(request.POST, instance=ficha)
-			# None if request.POST.get('') == '' else request.POST.get('')
+			
+			ficha = FichaCenso.objects.get(cod_censo=cod_censo)
+			ficha.barrio_o_colonia_domicilio = None if request.POST.get('barrio_o_colonia_domicilio') == '' else request.POST.get('barrio_o_colonia_domicilio')
+			ficha.calle_domicilio = None if request.POST.get('calle_domicilio') == '' else request.POST.get('calle_domicilio')
+			ficha.avenida_domicilio = None if request.POST.get('avenida_domicilio') == '' else request.POST.get('avenida_domicilio')
+			ficha.bloque_domicilio = None if request.POST.get('bloque_domicilio') == '' else request.POST.get('bloque_domicilio')
+			ficha.no_casa_domicilio = None if request.POST.get('no_casa_domicilio') == '' else request.POST.get('no_casa_domicilio')
+			ficha.color_domicilio = None if request.POST.get('color_domicilio') == '' else request.POST.get('color_domicilio')
+			ficha.punto_referencia_domicilio = None if request.POST.get('punto_referencia_domicilio') == '' else request.POST.get('punto_referencia_domicilio')
 
-		ficha = FichaCenso.objects.get(cod_censo=cod_censo)
-		ficha.barrio_o_colonia_domicilio = None if request.POST.get('barrio_o_colonia_domicilio') == '' else request.POST.get('barrio_o_colonia_domicilio')
-		ficha.calle_domicilio = None if request.POST.get('calle_domicilio') == '' else request.POST.get('calle_domicilio')
-		ficha.avenida_domicilio = None if request.POST.get('avenida_domicilio') == '' else request.POST.get('avenida_domicilio')
-		ficha.bloque_domicilio = None if request.POST.get('bloque_domicilio') == '' else request.POST.get('bloque_domicilio')
-		ficha.no_casa_domicilio = None if request.POST.get('no_casa_domicilio') == '' else request.POST.get('no_casa_domicilio')
-		ficha.color_domicilio = None if request.POST.get('color_domicilio') == '' else request.POST.get('color_domicilio')
-		ficha.punto_referencia_domicilio = None if request.POST.get('punto_referencia_domicilio') == '' else request.POST.get('punto_referencia_domicilio')
-
-		ficha.telefono_fijo_domicilio = None if request.POST.get('telefono_fijo_domicilio') == '' else request.POST.get('telefono_fijo_domicilio')
-		ficha.telefono_otro_domicilio = None if request.POST.get('telefono_otro_domicilio') == '' else request.POST.get('telefono_otro_domicilio')
-		ficha.celular_domicilio = None if request.POST.get('celular_domicilio') == '' else request.POST.get('celular_domicilio')
-		ficha.correo_electronico_domicilio = None if request.POST.get('correo_electronico_domicilio') == '' else request.POST.get('correo_electronico_domicilio')		
-		
-		ficha.save()
-		return redirect(reverse('nueva_ficha_4', kwargs={'cod_censo': ficha.cod_censo}))
+			ficha.telefono_fijo_domicilio = None if request.POST.get('telefono_fijo_domicilio') == '' else request.POST.get('telefono_fijo_domicilio')
+			ficha.telefono_otro_domicilio = None if request.POST.get('telefono_otro_domicilio') == '' else request.POST.get('telefono_otro_domicilio')
+			ficha.celular_domicilio = None if request.POST.get('celular_domicilio') == '' else request.POST.get('celular_domicilio')
+			ficha.correo_electronico_domicilio = None if request.POST.get('correo_electronico_domicilio') == '' else request.POST.get('correo_electronico_domicilio')		
+			
+			ficha.save()
+			return redirect(reverse('nueva_ficha_4', kwargs={'cod_censo': ficha.cod_censo}))
 	except Exception as e:
 		print e	
 
@@ -162,7 +159,7 @@ def nueva_ficha_6(request, cod_censo):
 			form1 = FichaCensoForm(instance=ficha)
 		else:
 			form1 = FichaCensoForm(request.POST, instance=ficha)
-			# None if request.POST.get('') == '' else request.POST.get('')
+		
 
 		ficha = FichaCenso.objects.get(cod_censo=cod_censo)
 		ficha.avenida_empresa = None if request.POST.get('') == 'avenida_empresa' else request.POST.get('avenida_empresa')
@@ -192,8 +189,7 @@ def nueva_ficha_7(request, cod_censo):
 			form1 = FichaCensoForm(instance=ficha)
 		else:
 			form1 = FichaCensoForm(request.POST, instance=ficha)
-			# None if request.POST.get('') == '' else request.POST.get('')
-
+			
 		ficha = FichaCenso.objects.get(cod_censo=cod_censo)
 		ficha.negocio_propio = None if request.POST.get('negocio_propio') == '' else request.POST.get('negocio_propio')
 		ficha.negocio_especificar = None if request.POST.get('negocio_especificar') == '' else request.POST.get('negocio_especificar')
@@ -206,7 +202,7 @@ def nueva_ficha_7(request, cod_censo):
 		ficha.trabaja_conyuge = None if request.POST.get('trabaja_conyuge') == '' else request.POST.get('trabaja_conyuge')
 		ficha.nivel_ingreso_conyuge = None if request.POST.get('nivel_ingreso_conyuge') == '' else request.POST.get('nivel_ingreso_conyuge')
 		ficha.save()
-		return redirect(reverse('ingresar_hijos', kwargs={'cod_censo': ficha.cod_censo}))
+		return redirect(reverse('nueva_ficha_8', kwargs={'cod_censo': ficha.cod_censo}))
 	except Exception as e:
 		print e		
 	return render(request, 'nueva_ficha_7.html', {'form1': form1})	
@@ -237,8 +233,8 @@ def nueva_ficha_8(request, cod_censo):
 
 
 
-def ingresar_hijos(request):
-	# ficha = FichaCenso.objects.get(pk=cod_censo)
+def ingresar_hijos(request, cod_censo):
+	ficha = FichaCenso.objects.get(pk=cod_censo)
 
 	try:
 		if request.method == 'GET':
@@ -252,6 +248,8 @@ def ingresar_hijos(request):
 	except Exception as e:
 		print e	
 	return render(request, 'ingresar_hijos.html', {})
+
+
 
 
 def nueva_ficha_9(request):
@@ -316,12 +314,18 @@ def nueva_ficha_14(request):
 	else:
 		form1 = FichaCensoForm()
 	
-	return render(request, 'nueva_ficha_14.html', {'form1': form1})						
+	return render(request, 'nueva_ficha_14.html', {'form1': form1})			
+
+
+def nueva_ficha_15(request):
+	# ficha = FichaCenso.objects.get(pk=cod_censo)
 	
-
-
-
-
+	if request.method == 'GET':
+		form1 = FichaCensoForm()
+	else:
+		form1 = FichaCensoForm()
+	
+	return render(request, 'nueva_ficha_15.html', {'form1': form1})	
 
 
 
@@ -344,4 +348,11 @@ def ajax3(request):
 	if request.is_ajax():
 		cod_departamento_empresa = request.GET['cod_departamento_empresa']
 		data = list(Municipios.objects.values('cod_municipio', 'desc_municipio').filter(cod_departamento=cod_departamento_empresa))
-		return HttpResponse(json.dumps(data), content_type='application/json')		
+		return HttpResponse(json.dumps(data), content_type='application/json')	
+
+def ajax_municipioEncuesta(request):
+	if request.is_ajax():
+		departamento_encuesta = request.GET['departamento_encuesta']
+		data = list(Municipios.objects.values('cod_municipio', 'desc_municipio').filter(cod_departamento=departamento_encuesta))
+		return HttpResponse(json.dumps(data), content_type='application/json')
+

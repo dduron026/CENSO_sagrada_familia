@@ -62,6 +62,14 @@
            
          
               <!-- <h5 class="text-center sub-style"><b>Identificación:</b></h5><hr> -->
+            <div class="row">
+              <div class="col-sm-5">
+                 {{form1.identidad|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                 {{form1.fecha_nacimiento|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>  
 
             <div class="row">            
               <div class="col-sm-5 ">
@@ -82,18 +90,7 @@
               <div class="col-sm-5">
                 {{form1.nombres|bootstrap_horizontal:'col-xs-5'}} 
               </div>
-            </div>
-
-             <!-- formato correcto -->
-            <div class="row">
-              <div class="col-sm-5">
-                 {{form1.identidad|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                 {{form1.fecha_nacimiento|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div> 
-              <!-- <h5 class="text-center sub-style"><b>Lugar de nacimiento:</b></h5><hr> -->
+            </div>          
 
 
             <div class="row">
@@ -105,7 +102,7 @@
                <label for="id_cod_municipio_nacimiento" class="col-xs-5 control-label">Municipio nacimiento</label>
                    <div class="col-xs-7">
                       <select class="form-control" id="id_cod_municipio_nacimiento" name="cod_municipio" required>
-                         <option value="">---------------</option> 
+                         <option value="">----------</option> 
                       </select>
                    </div>                 
               </div>              
@@ -166,7 +163,7 @@
 
     $('#id_cod_departament_nacimiento').change(function(){
       $('#id_cod_municipio_nacimiento').empty();
-      $('#id_cod_municipio_nacimiento').append("<option value=''>---------------</option>");
+      $('#id_cod_municipio_nacimiento').append("<option value=''>-----------</option>");
        cod_departament_nacimiento = $(this).val()
        $.ajax({
           type: "GET",

@@ -131,7 +131,7 @@ class FichaCenso(models.Model):
 	numero_ninos = models.IntegerField(db_column='NumeroNinos', blank=True, null=True)  # Field name made lowercase.
 	numero_adolescentes = models.IntegerField(db_column='NumeroAdolescentes', blank=True, null=True)  # Field name made lowercase.
 	
-	# VISTA 10
+	# VISTA 10  arreglar
 	mayores_edad = models.IntegerField(db_column='MayoresEdad', blank=True, null=True)  # Field name made lowercase.
 	mayores_a_60 = models.IntegerField(db_column='Mayoresa60', blank=True, null=True)  # Field name made lowercase.
 	anos_afiliacion = models.IntegerField(db_column='AnosAfiliacion', blank=True, null=True)  # Field name made lowercase.
@@ -165,13 +165,18 @@ class FichaCenso(models.Model):
 	nombre_institucion_casa = models.CharField(db_column='NombreInsitucionCasa', max_length=100, blank=True, null=True)  # Field name made lowercase.
 	sistema_cable = models.NullBooleanField(db_column='SistemaCable')  # Field name made lowercase.
 	internet = models.NullBooleanField(db_column='Internet')  # Field name made lowercase.
+	
+	# VISTA 14
 	remesas_extrajero = models.NullBooleanField(db_column='RemesasExtrajero')  # Field name made lowercase.
 	pais_remesas = models.CharField(db_column='PaisRemesas', max_length=100, blank=True, null=True)  # Field name made lowercase.
-	ciuda_dremesas = models.CharField(db_column='CiudadRemesas', max_length=100, blank=True, null=True)  # Field name made lowercase.
+	ciudad_remesas = models.CharField(db_column='CiudadRemesas', max_length=100, blank=True, null=True)  # Field name made lowercase.
 	quien_envia = models.CharField(db_column='QuienEnvia', max_length=100, blank=True, null=True)  # Field name made lowercase.
 	uso_remesas = models.CharField(db_column='UsoRemesas', max_length=1, blank=True, null=True)  # Field name made lowercase.
 	empresa_remesas = models.CharField(db_column='EmpresaRemesas', max_length=1, blank=True, null=True)  # Field name made lowercase.
+	cada_cuanto_recibe = models.CharField(db_column='CadaCuantoRecibe', max_length=1, blank=True, null=True)  # Field name made lowercase.
 	promedio_remesas = models.CharField(db_column='PromedioRemesas', max_length=1, blank=True, null=True)  # Field name made lowercase.
+	
+	# VISTA 15
 	fecha_censo = models.DateTimeField(db_column='FechaCenso', blank=True, null=True)  # Field name made lowercase.
 	cod_usuario = models.IntegerField(db_column='CodUsuario', blank=True, null=True)  # Field name made lowercase.
 	departamento_encuesta = models.ForeignKey(Departamentos, models.DO_NOTHING, db_column='DepartamentEncuesta', blank=True, null=True)  # Field name made lowercase.
@@ -190,6 +195,9 @@ class Filiales(models.Model):
 	class Meta:
 		managed = False
 		db_table = 'Censo].[Filiales'
+
+	def __unicode__(self):
+		return self.nombre_filial		
 
 
 class Hijos(models.Model):

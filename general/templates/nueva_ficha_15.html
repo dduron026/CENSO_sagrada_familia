@@ -13,6 +13,9 @@
 
 <link rel="stylesheet" href="{% static 'plugins/select2/select2.min.css' %}">
 <link rel="stylesheet" href="{% static 'plugins/select2/select2-bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/bootstrap-datepicker/css/bootstrap-datepicker.css' %}">
+<script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js' %}"></script>
 
 
 
@@ -51,67 +54,42 @@
 <div class="box box-primary with-border">
         <div class="box-body">
         <p class="pull-right">Fecha: {% now 'd-m-Y' %}</p>
-        <h5 class="text-center sub-style">D: REMESAS </h5><hr>        
+        <h5 class="text-center sub-style">GRACIAS POR SU VALIOSO TIEMPO</h5><hr>        
           
           <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
           
-               <div class="row">
+            <div class="row">
               <div class="col-sm-5">
-                  {{form1.remesas_extrajero|bootstrap_horizontal:'col-xs-5'}}
+                  {{form1.fecha_censo|bootstrap_horizontal:'col-xs-5'}}
               </div>
                <div class="col-sm-5">
-                  {{form1.pais_remesas|bootstrap_horizontal:'col-xs-5'}}
+                  {{form1.cod_usuario|bootstrap_horizontal:'col-xs-5'}}
               </div>              
             </div>
 
             <div class="row">
               <div class="col-sm-5">
-                  {{form1.ciudad_remesas|bootstrap_horizontal:'col-xs-5'}}
+                  {{form1.departamento_encuesta|bootstrap_horizontal:'col-xs-5'}}
               </div>
-               <div class="col-sm-5">
-                  {{form1.quien_envia|bootstrap_horizontal:'col-xs-5'}}
+              <div class="col-sm-5">
+               <label for="id_municipio_encuesta" class="col-xs-5 control-label">Municipio encuesta</label>
+                   <div class="col-xs-7">
+                      <select class="form-control" id="id_municipio_encuesta" name="cod_municipio" required>
+                         <option value="">----------</option> 
+                      </select>
+                   </div>                 
               </div>              
             </div>
 
             <div class="row">
               <div class="col-sm-5">
-                  {{form1.uso_remesas|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                  {{form1.empresa_remesas|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
+                  {{form1.filial_encuesta|bootstrap_horizontal:'col-xs-5'}}
+              </div>                          
             </div>
-
-            <div class="row">
-              <div class="col-sm-5">
-              <!-- aqui meter cada cuanto recibe -->
-              </div>
-               <div class="col-sm-5">
-                  {{form1.promedio_remesas|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div>
-            
-                
-           
-
-                        
-
-               
-
-             <!-- formato correcto -->
-            <div class="row">
-              <div class="col-sm-5">
-              </div>
-               <div class="col-sm-5">
-              </div>              
-            </div> 
-            <hr>
-                
-
 
 
               <div class="col-sm-12">
-                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button>
+                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Guardar</button>
                              
               </div>
 
@@ -125,7 +103,35 @@
                  
      </div>
                 
-</div> 
+</div>
+
+<script>
+  
+    $('#id_fecha_censo').datepicker({
+
+      autoclose: true,
+      format: 'yyyy-mm-dd',
+      language: 'es',
+    });
+
+    $('#id_departamento_encuesta').change(function(){
+      $('#id_municipio_encuesta').empty();
+      $('#id_municipio_encuesta').append("<option value=''>-----------</option>");
+       departamento_encuesta = $(this).val()
+       $.ajax({
+          type: "GET",
+          data: { departamento_encuesta: departamento_encuesta },
+          url: "{% url 'ajax_municipioEncuesta' %}",
+          success: function(response){
+           $.each(response, function(key, val){
+              $('#id_municipio_encuesta').append("<option value="+val.cod_municipio+">" + val.desc_municipio + "</option>");
+            });
+              $('#id_municipio_encuesta').trigger("chosen:updated");
+            }
+   });
+});
+
+</script> 
 
 
 {% endblock %}  

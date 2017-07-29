@@ -153,7 +153,7 @@ REMESAS = (
 
 LUGAR_TRABAJO = (
 
-	('', '------'),
+	('', '---------'),
 	('A', 'Gobierno Central'),
 	('B', 'Institución Autónoma'),
 	('C', 'Municipalidad'),
@@ -161,14 +161,14 @@ LUGAR_TRABAJO = (
 	)
 
 TIPO_CONTRATO = (
-	('','------'),
+	('','---------'),
 	('A','Permanente'),
 	('B','Temporal'),
 	('C','Por horas'),
 	)
 
 TIPO_CASA = (
-	('','------'),
+	('','---------'),
 	('A','Propia'),
 	('B','Alquilada'),
 	('C','Familiar'),
@@ -198,7 +198,7 @@ OTROS_PRESTAMOS_DESTINO = (
 	)
 
 TIPO_CUENTA_AHORRO = (
-	('','------'),
+	('','---------'),
 	('A','DPF'),
 	('B','Cuenta Retirable'),
 	('C','Fondo de pensiones'),
@@ -207,7 +207,7 @@ TIPO_CUENTA_AHORRO = (
 	)
 
 TIPO_TARJETA_CREDITO = (
-	('','------'),
+	('','---------'),
 	('A','Clásica'),
 	('B','Oro'),
 	('C','Platinum'),
@@ -215,7 +215,7 @@ TIPO_TARJETA_CREDITO = (
 	)
 
 LIMITE_TARJETA = (
-	('','------'),
+	('','---------'),
 	('A','Hasta $400.00'),
 	('B','De $401 a $800'),
 	('C','De $800 a $1200'),
@@ -224,11 +224,50 @@ LIMITE_TARJETA = (
 	)
 
 TIPO_COMPRA_CASA = (
-	('','------'),
+	('','---------'),
 	('A','Propia'),
 	('B','Alquilada'),
 	('C','Familiar'),
 	('D','Pagándola'),	
+	)
+
+USO_REMESAS = (
+	('','---------'),
+	('A','Gastos de casa'),
+	('B','Educación de los hijos'),
+	('C','Medicinas'),
+	('D','Pago de deudas'),	
+	('E','Otros'),	
+	)
+
+
+EMPRESA_REMESAS = (
+	('','---------'),
+	('A','Wester Unión'),
+	('B','Money Gram'),
+	('C','Tigo'),
+	('D','Vigo'),	
+	('E','Otras'),	
+	)
+
+PROMEDIO_REMESAS = (
+	('','---------'),
+	('A','Menos de $100'),
+	('B','De $101 a $200'),
+	('C','De $201 a $350'),
+	('D','De $351 a $500'),	
+	('E','De $501 en adelante'),	
+	)
+
+
+CADA_CUANTO_RECIBE = (
+	('','---------'),
+	('A','Semanal'),
+	('B','Quincenal'),
+	('C','Mensual'),
+	('D','Cada dos meses'),	
+	('E','Cada seis meses'),	
+	('F','Una vez al año'),	
 	)
 
 class FichaCensoForm(ModelForm):
@@ -264,7 +303,11 @@ class FichaCensoForm(ModelForm):
 	sistema_cable = forms.ChoiceField(widget=RadioSelect, choices=SISTEMA_CABLE, label='Tiene sistema de cable en hogar', required=False)
 	internet = forms.ChoiceField(widget=RadioSelect, choices=INTERNET, label='Tiene internet en su hogar', required=False)
 	remesas_extrajero = forms.ChoiceField(widget=RadioSelect, choices=REMESAS, label='Recibe remesas del extranjero', required=False)
-	
+	uso_remesas = forms.ChoiceField(choices=USO_REMESAS, label='Para qué usa el dinero que recibe del extranjero', required=False)
+	empresa_remesas = forms.ChoiceField(choices=EMPRESA_REMESAS, label='Por qué empresa recibe o envía sus remesas', required=False)
+	cada_cuanto_recibe = forms.ChoiceField(choices=CADA_CUANTO_RECIBE, label='Cada cuánto le envía remesas', required=False)
+	promedio_remesas = forms.ChoiceField(choices=PROMEDIO_REMESAS, label='valor promedio de remesas que recibe', required=False)
+
 	class Meta:
 		model = FichaCenso
 		fields = "__all__"
@@ -284,7 +327,8 @@ class FichaCensoForm(ModelForm):
 		'mayores_edad': ('Cantidad de mayores de edad'), 'mayores_a_60': ('Cantidad de mayores a 60'),
 		'anos_afiliacion': ('cuantos años tiene de ser afiliado'), 'nombre_institucion_ahorro': ('Nombre institución de ahorro'),
 		'otros_tipo_cuenta':('Otras (especifique)'),'nombre_institucion_tarjeta':('Con que institución(es) tiene tarjeta de crédito'),
-		'nombre_institucion_casa': ('Banco'),}
+		'nombre_institucion_casa': ('Banco'),'pais_remesas': ('De qué país'),'ciudad_remesas':('Ciudad'),
+		'quien_envia': ('Quien le envía'), 'cod_usuario': ('Código del Usuario') }
 
 
 
