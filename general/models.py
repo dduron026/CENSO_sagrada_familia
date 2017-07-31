@@ -76,7 +76,7 @@ class FichaCenso(models.Model):
 	nombres_conyuge = models.CharField(db_column='NombresConyuge', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	primer_apellido_conyuge = models.CharField(db_column='PrimerApellidoConyuge', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	segundo_apellido_conyuge = models.CharField(db_column='SegundoApellidoConyuge', max_length=50, blank=True, null=True)  # Field name made lowercase.
-	apellido_casada = models.CharField(db_column='ApellidoCasada', max_length=50, blank=True, null=True)  # Field name made lowercase.
+	apellido_de_casada = models.CharField(db_column='ApellidoCasada', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	
 	# VISTA 5
 	trabaja_actualmente = models.NullBooleanField(db_column='TrabajaActualmente')  # Field name made lowercase.
@@ -131,7 +131,7 @@ class FichaCenso(models.Model):
 	numero_ninos = models.IntegerField(db_column='NumeroNinos', blank=True, null=True)  # Field name made lowercase.
 	numero_adolescentes = models.IntegerField(db_column='NumeroAdolescentes', blank=True, null=True)  # Field name made lowercase.
 	
-	# VISTA 10  arreglar
+	# VISTA 10 
 	mayores_edad = models.IntegerField(db_column='MayoresEdad', blank=True, null=True)  # Field name made lowercase.
 	mayores_a_60 = models.IntegerField(db_column='Mayoresa60', blank=True, null=True)  # Field name made lowercase.
 	anos_afiliacion = models.IntegerField(db_column='AnosAfiliacion', blank=True, null=True)  # Field name made lowercase.

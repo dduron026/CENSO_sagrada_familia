@@ -57,7 +57,51 @@
           
           <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
          
-            
+          
+            {%  for cant in cantidad  %}
+                <div class="row">
+              <div class="col-sm-5">
+                  {{hijos.num_hijo|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+               {{hijos.nombre_hijo|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{hijos.edad|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+               {{hijos.estudia_trabaja|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{hijos.nivel_estudio|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+               {{hijos.institucion_estudio|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{hijos.institucion_trabajo|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+               {{hijos.sueldo|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div><hr>
+
+
+
+            {%  endfor  %}
+
+              
+              
+       
                     
 
              <!-- formato correcto -->

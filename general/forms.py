@@ -64,6 +64,41 @@ PAPEL_CASA = (
 	
 )
 
+SE_DEDICA = (
+	('','---------'),	
+	('A', 'Estudia'),
+	('B', 'Trabaja'),
+	('C', 'Ambos'),
+)
+
+NIVEL_ESTUDIO_HIJO = (
+	('','---------'),
+	('A', 'Ninguno'),
+	('B', 'Primaria Incompleta'),
+	('C', 'Primaria Completa'),
+	('D', 'Secundaria'),
+	('E', 'Técnico Medio '),
+	('F', 'Técnico Superior'),
+	('G', 'Universidad'),
+	('H', 'Posgrado'),
+	('I', 'NS/NR'),
+)
+
+INSTITICION_ESTUDIA = (
+	('','---------'),
+	('A', 'Privada'),
+	('B', 'Pública'),	
+)
+
+INSTITICION_TRABAJA = (
+	('','---------'),
+	('A', 'Privada'),
+	('B', 'Pública'),	
+)
+
+
+
+
 # bit
 CONYUGUE = (
 	(True, 'Si'),
@@ -165,6 +200,13 @@ TIPO_CONTRATO = (
 	('A','Permanente'),
 	('B','Temporal'),
 	('C','Por horas'),
+	)
+
+TIPO_AFILIADO = (
+	('','---------'),
+	('A','Planilla'),
+	('B','Ventanilla'),
+	
 	)
 
 TIPO_CASA = (
@@ -307,7 +349,7 @@ class FichaCensoForm(ModelForm):
 	empresa_remesas = forms.ChoiceField(choices=EMPRESA_REMESAS, label='Por qué empresa recibe o envía sus remesas', required=False)
 	cada_cuanto_recibe = forms.ChoiceField(choices=CADA_CUANTO_RECIBE, label='Cada cuánto le envía remesas', required=False)
 	promedio_remesas = forms.ChoiceField(choices=PROMEDIO_REMESAS, label='valor promedio de remesas que recibe', required=False)
-
+	tipo_afiliado = forms.ChoiceField(choices=TIPO_AFILIADO, label='Tipo de Afiliado', required=False)
 	class Meta:
 		model = FichaCenso
 		fields = "__all__"
@@ -328,17 +370,26 @@ class FichaCensoForm(ModelForm):
 		'anos_afiliacion': ('cuantos años tiene de ser afiliado'), 'nombre_institucion_ahorro': ('Nombre institución de ahorro'),
 		'otros_tipo_cuenta':('Otras (especifique)'),'nombre_institucion_tarjeta':('Con que institución(es) tiene tarjeta de crédito'),
 		'nombre_institucion_casa': ('Banco'),'pais_remesas': ('De qué país'),'ciudad_remesas':('Ciudad'),
-		'quien_envia': ('Quien le envía'), 'cod_usuario': ('Código del Usuario') }
+		'quien_envia': ('Quien le envía'), 'cod_usuario': ('Código del Usuario'),
+		'cod_filial_afiliacion':('En qué filial se afilió'), 'cod_filial_visita':('Qué filial visita con más frecuencia') }
 
 
 
-class IngresarHijosForm(ModelForm):
+class HijosForm(ModelForm):
+
+	estudia_trabaja = forms.ChoiceField(choices=SE_DEDICA, label='A qué se dedica', required=False)
+	nivel_estudio = forms.ChoiceField(choices=NIVEL_ESTUDIO_HIJO, label='Nivel de estudio', required=False)
+	institucion_estudio = forms.ChoiceField(choices=INSTITICION_ESTUDIA, label='Institución donde estudia es', required=False)
+	institucion_trabajo = forms.ChoiceField(choices=INSTITICION_TRABAJA, label='Institución donde trabaja es', required=False)
+
 
 	class Meta:
 		model = Hijos
 		fields = "__all__"
 		exclude = []
-		labels = {}
+		labels = {'num_hijo':('Hijo Nro.'),
+		 'nombre_hijo':('Nombre del hijo'),
+		 }
 	
 		
 
