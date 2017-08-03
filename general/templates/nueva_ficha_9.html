@@ -69,7 +69,7 @@
               <div class="col-sm-5">
                   {{form1.vehiculo|bootstrap_horizontal:'col-xs-5'}}
               </div>
-               <div class="col-sm-5">
+               <div class="col-sm-5" style="display: none;" id="id_cantidad_vehiculos">
                   {{form1.cantidad_vehiculos|bootstrap_horizontal:'col-xs-5'}}
               </div>              
             </div>    
@@ -99,19 +99,7 @@
                <div class="col-sm-5">
                   {{form1.numero_adolescentes|bootstrap_horizontal:'col-xs-5'}}
               </div>              
-            </div>
-
-               
-
-             <!-- formato correcto -->
-            <div class="row">
-              <div class="col-sm-5">
-              </div>
-               <div class="col-sm-5">
-              </div>              
-            </div> 
-            <hr>
-                
+            </div><hr>
 
 
 
@@ -123,7 +111,7 @@
 
         </div>                                   
            
-                 <!--  <button type="reset" class="btn btn-default btn-md"><i class="glyphicon glyphicon-repeat"></i> Limpiar</button>      -->                          
+                       
                
       </form>
 
@@ -132,6 +120,16 @@
                 
 </div> 
 
+<script>
+  $(document).ready(function(){
+    $('input[name=vehiculo]').change(function(){
+      if($('input[name=vehiculo]:checked').val() == 'True'){
+        $('#id_cantidad_vehiculos').fadeIn('slow')
+      }else{
+        $('#id_cantidad_vehiculos').fadeOut('slow')
+      }
+    });
+  });
+</script>
 
 {% endblock %}  
-     <!-- /.content -->

@@ -7,15 +7,9 @@
         
 {% block contenido %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
 <script src="{% static 'plugins/select2/select2.min.js' %}"></script>
-
 <link rel="stylesheet" href="{% static 'plugins/select2/select2.min.css' %}">
 <link rel="stylesheet" href="{% static 'plugins/select2/select2-bootstrap.min.css' %}">
-
-
-
 <style>
   .select2-container .select2-selection--single .select2-selection__rendered{
     margin-top: 0px;
@@ -42,9 +36,7 @@
                 url('http://i.stack.imgur.com/FhHRx.gif') 
                 50% 50% 
                 no-repeat;
-  }
-
-
+  
 
 </style>
 
@@ -63,49 +55,49 @@
             </div> 
 
             <div class="row">
-              <div class="col-sm-5">
+              <div class="col-sm-5" style="display: none;" id="id_lugar_de_trabajo">
                   {{form1.lugar_de_trabajo|bootstrap_horizontal:'col-xs-5'}}
               </div>
-               <div class="col-sm-5">
+               <div class="col-sm-5" style="display: none;" id="id_tipo_contratacion">
                   {{form1.tipo_contratacion|bootstrap_horizontal:'col-xs-5'}}
               </div>              
             </div>
 
             <div class="row">
-              <div class="col-sm-5">
+              <div class="col-sm-5" style="display: none;" id="id_antiguedad_meses">
                   {{form1.antiguedad_meses|bootstrap_horizontal:'col-xs-5'}}
               </div>
-               <div class="col-sm-5">
+               <div class="col-sm-5" style="display: none;" id="id_nombre_empresa">
                   {{form1.nombre_empresa|bootstrap_horizontal:'col-xs-5'}}
               </div>              
             </div>
 
              <div class="row">
-              <div class="col-sm-5">
+              <div class="col-sm-5" style="display: none;" id="id_departamento_o_seccion">
                   {{form1.departamento_o_seccion|bootstrap_horizontal:'col-xs-5'}}
               </div>
-               <div class="col-sm-5">
+               <div class="col-sm-5" style="display: none;" id="id_cargo">
                   {{form1.cargo|bootstrap_horizontal:'col-xs-5'}}
               </div>              
             </div>            
 
             <div class="row">
-              <div class="col-sm-8">
-                  <h5><b>Dirección Laboral:</b> </h5>
+              <div class="col-sm-11" style="display: none;" id="direccion">
+                  <p class="text-center sub-style">DIRECCION LABORAL </p>
               </div>
                            
             </div>
 
             <div class="row">
-              <div class="col-sm-5">
+              <div class="col-sm-5" style="display: none;" id="id_cod_departamento">
                   {{form1.cod_departamento_empresa|bootstrap_horizontal:'col-xs-5'}}
               </div>
 
-              <div class="col-sm-5">
+              <div class="col-sm-5" style="display: none;" id="id_cod_municipio">
                <label for="id_cod_municipio_empresa" class="col-xs-5 control-label">Municipio Empresa</label>
                    <div class="col-xs-7">
-                      <select class="form-control" id="id_cod_municipio_empresa" name="cod_municipio" required="">
-                         <option value="">---------------</option>
+                      <select class="form-control" id="id_cod_municipio_empresa" name="cod_municipio">
+                         <option value="">--------------</option>
                       </select>
                    </div>                 
               </div>
@@ -113,28 +105,13 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-5">
+              <div class="col-sm-5" style="display: none;" id="id_barrio_o_colonia_empresa">
                   {{form1.barrio_o_colonia_empresa|bootstrap_horizontal:'col-xs-5'}}
               </div>
-               <div class="col-sm-5">
+               <div class="col-sm-5" style="display: none;" id="id_calle_empresa" >
                   {{form1.calle_empresa|bootstrap_horizontal:'col-xs-5'}}
               </div>              
-            </div>
-
-             
-            
-    
-         
-
-             <!-- formato correcto -->
-            <div class="row">
-              <div class="col-sm-5">
-              </div>
-               <div class="col-sm-5">
-              </div>              
-            </div> 
-            <hr>
-                
+            </div><hr> 
 
 
 
@@ -145,8 +122,7 @@
 
 
         </div>                                   
-           
-                 <!--  <button type="reset" class="btn btn-default btn-md"><i class="glyphicon glyphicon-repeat"></i> Limpiar</button>      -->                          
+                         
                
       </form>
 
@@ -156,7 +132,9 @@
 </div> 
 
 <script>
-   
+
+  $(document).ready(function(){
+
     $('#id_cod_departamento_empresa').change(function(){
       $('#id_cod_municipio_empresa').empty();
       $('#id_cod_municipio_empresa').append("<option value=''>---------------</option>");
@@ -173,6 +151,36 @@
       }
    });
 });
+
+    $('input[name=trabaja_actualmente]').change(function(){
+      if ($('input[name=trabaja_actualmente]:checked').val() == 'True') {
+        $('#id_lugar_de_trabajo, #id_tipo_contratacion , #id_antiguedad_meses , #id_nombre_empresa, #id_departamento_o_seccion, #id_cargo , #id_direccion , #id_cod_departamento, #id_cod_municipio, #id_barrio_o_colonia_empresa, #id_calle_empresa').show()
+      }else{
+       
+        $('#id_lugar_de_trabajo, #id_tipo_contratacion , #id_antiguedad_meses , #id_nombre_empresa, #id_departamento_o_seccion, #id_cargo , #id_direccion , #id_cod_departamento, #id_cod_municipio, #id_barrio_o_colonia_empresa, #id_calle_empresa').hide()       
+
+      }
+     
+    });
+
+    $('#id_cargo').keydown(function(e) {
+      if (e.shiftKey || e.ctrlKey || e.altKey) {
+        e.preventDefault();
+      } else {
+        var key = e.keyCode;
+        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+          e.preventDefault();
+        }
+      }
+    });
+
+
+
+  });
+
+
+   
+
  </script>
 
 

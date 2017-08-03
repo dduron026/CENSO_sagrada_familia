@@ -107,23 +107,16 @@
 
             </div>
 
-            <div class="row">
-            <div class="col-sm-5">
-               {{form1.correo_electronico_domicilio|bootstrap_horizontal:'col-xs-5'}}
-            </div>
-            </div>
-     
 
-             <!-- formato correcto -->
+            
             <div class="row">
               <div class="col-sm-5">
+                 {{form1.correo_electronico_domicilio|bootstrap_horizontal:'col-xs-5'}}
               </div>
-               <div class="col-sm-5">
-              </div>              
-            </div> 
-              <!-- <h5 class="text-center sub-style"><b>Lugar de nacimiento:</b></h5><hr> -->
+            </div><hr>
 
-  
+
+         
 
 
 
@@ -134,9 +127,7 @@
 
 
         </div>                                   
-           
-                 <!--  <button type="reset" class="btn btn-default btn-md"><i class="glyphicon glyphicon-repeat"></i> Limpiar</button>      -->                          
-               
+
       </form>
 
                  
@@ -145,13 +136,48 @@
 </div> 
 
  <script>
-   
+  $(document).ready(function(){
+    $()
+
     $('#id_fecha_nacimiento').datepicker({
       autoclose: true,
       format: 'dd-mm-yyyy',
       language: 'es',
     })
- </script>    
+
+            // SOLO NUMEROS
+        $('#id_telefono_fijo_domicilio, #id_no_casa_domicilio, #id_telefono_otro_domicilio, #id_celular_domicilio').keydown(function(event) {
+      // Allow special chars + arrows
+      if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9
+        || event.keyCode == 27 || event.keyCode == 13
+        || (event.keyCode == 65 && event.ctrlKey === true)
+        || (event.keyCode >= 35 && event.keyCode <= 39)){
+          return;
+      }else {
+        // If it's not a number stop the keypress
+        if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+          event.preventDefault();
+        }
+      }
+    });
+
+        // solo letras
+
+    $('#id_color_domicilio').keydown(function(e) {
+      if (e.shiftKey || e.ctrlKey || e.altKey) {
+        e.preventDefault();
+      } else {
+        var key = e.keyCode;
+        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+          e.preventDefault();
+        }
+      }
+    });
+  
+
+  })
+
+</script> 
 
 
 

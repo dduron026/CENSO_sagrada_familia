@@ -14,10 +14,11 @@ GENERO = (
 ESTADO_CIVIL = (
 	
 	('A', 'Soltero'),
-	('B', 'Casado'),
+	('B', 'Casado(a)'),
 	('C', 'Union Libre'),
 	('D', 'Viudo'),
 	('E', 'Divorciado'),
+	
 
 )
 
@@ -312,6 +313,22 @@ CADA_CUANTO_RECIBE = (
 	('F','Una vez al año'),	
 	)
 
+MONEDA = (
+	('','---------'),
+	('A','Lempiras'),
+	('B','Dólares'),
+
+	)
+
+TIPO_PRESTAMO = (
+	('','---------'),
+	('A','Préstamo Hipotecario'),
+	('B','Préstamo de consumo'),
+	('C','Tarjeta de crédito'),
+
+	)
+
+
 class FichaCensoForm(ModelForm):
 
 	genero = forms.ChoiceField(widget=RadioSelect, choices=GENERO, required=False)
@@ -333,7 +350,7 @@ class FichaCensoForm(ModelForm):
 	vehiculo = forms.ChoiceField(widget=RadioSelect, choices=POSEE_VEHICULO, label='Posee vehículo?', required=False)
 	cursos_capacitaciones = forms.ChoiceField(widget=RadioSelect, choices=CURSOS, label='Cursos y capacitaciones', required=False)
 	asambleas_sectoriales = forms.ChoiceField(widget=RadioSelect, choices=ASAMBLEAS, label='Asambleas sectoriales', required=False)
-	prestamos_otros = forms.ChoiceField(widget=RadioSelect, choices=PRESTAMOS_OTROS, label='Préstamo con otra institución', required=False)
+	prestamos_otros = forms.ChoiceField(widget=RadioSelect, choices=PRESTAMOS_OTROS, label='Tiene Préstamo con otra institución', required=False)
 	tipo_institucion_prestamos = forms.ChoiceField(choices=INSTITUCION_OTROS_PRESTAMOS, label='Con qué otra institución tiene Préstamo', required=False)
 	destino_pendiente_pago = forms.ChoiceField(choices=OTROS_PRESTAMOS_DESTINO, label='los Préstamos pendientes de pago fueron para', required=False)
 	cuenta_ahorro_otro = forms.ChoiceField(widget=RadioSelect, choices=CUENTA_AHORRO_OTRO, label='Tiene cuenta de ahorro en otra institución', required=False)
@@ -371,7 +388,11 @@ class FichaCensoForm(ModelForm):
 		'otros_tipo_cuenta':('Otras (especifique)'),'nombre_institucion_tarjeta':('Con que institución(es) tiene tarjeta de crédito'),
 		'nombre_institucion_casa': ('Banco'),'pais_remesas': ('De qué país'),'ciudad_remesas':('Ciudad'),
 		'quien_envia': ('Quien le envía'), 'cod_usuario': ('Código del Usuario'),
-		'cod_filial_afiliacion':('En qué filial se afilió'), 'cod_filial_visita':('Qué filial visita con más frecuencia') }
+		'cod_filial_afiliacion':('En qué filial se afilió'),
+		'cod_filial_visita':('Qué filial visita con más frecuencia')
+		
+
+		 }
 
 
 
@@ -388,8 +409,39 @@ class HijosForm(ModelForm):
 		fields = "__all__"
 		exclude = []
 		labels = {'num_hijo':('Hijo Nro.'),
-		 'nombre_hijo':('Nombre del hijo'),
-		 }
+				 'nombre_hijo':('Nombre del hijo'),
+				 'institucion':('Institución'),
+				 'tipo_prestamos':('Tipo de préstamo'),
+				 'plazo_meses':('Plazo en meses'),
+				 }
+
+class PrestamosForm(ModelForm):
+
+	moneda = forms.ChoiceField(choices=MONEDA, label='Moneda', required=False)
+	tipo_prestamos = forms.ChoiceField(choices=TIPO_PRESTAMO, label='Tipo de préstamo', required=False)
+
+
+	class Meta:
+		model = Prestamos
+		fields = "__all__"
+		exclude = []
+		labels = {
+				 'institucion':('Institución'),			
+				 'plazo_meses':('Plazo en meses'),
+				 }
+
+class ProfesionOficioForm(ModelForm):
+
+	class Meta:
+		model = ProfesionOficio
+		fields = "__all__"
+		exclude = []
+		labels = {
+				'desc_profesion':('Profesión u oficio'),
+				}
+
+
+
 	
 		
 

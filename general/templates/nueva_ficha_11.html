@@ -53,6 +53,44 @@
         <p class="pull-right">Fecha: {% now 'd-m-Y' %}</p>
         <h5 class="text-center sub-style">C. ARRAIGO </h5><hr>
 
+          <div id="prestamo" class="prestamo_copia" style="display: none">
+
+            <div class="row">
+              <div class="col-sm-5">
+                {{prestamos.institucion|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-5">
+                {{prestamos.tipo_prestamos|bootstrap_horizontal:'col-xs-5'}}
+              </div> 
+              </div>     
+
+
+            <div class="row">
+              <div class="col-sm-5">
+                {{prestamos.moneda|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-5">
+                {{prestamos.tasa|bootstrap_horizontal:'col-xs-5'}}
+              </div>          
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-5">
+                {{prestamos.monto_original|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-5">
+                {{prestamos.plazo_meses|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-2">
+                <button type="button" class="btn btn-danger pull-right eliminar">Eliminar</button>
+              </div>
+            
+            </div><hr>
+           
+              
+          </div><br><hr>
+
       <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
          
             
@@ -65,44 +103,23 @@
               </div>              
             </div>
 
+  
         <p class="page-header"></p>
         <p class="text-center sub-style">
         INGRESAR PRESTAMOS
         </p>
 
-
-      <div class="row">
-        <div class="col-sm-12">
-          <button type="button" class="btn btn-default pull-left" id='agregar_prestamo'>agregar Préstamo</button>
-          <br><br><br>
-        </div>
-      </div>
-
-
-
-      <!-- en este div se ingresan los otros con jquery -->
-      <div id="otros_prestamos"> </div>
-
-
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-success pull-left" id='btn-actualizar'>guardar Préstamo</button>
-      </div>   
-
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="button" class="btn btn-default pull-right" id='agregar_prestamo'>Nuevo Préstamo</button>
+                <br><br><br>
+              </div>
+            </div><hr>
 
          
 
-               
-
-             <!-- formato correcto -->
-            <div class="row">
-              <div class="col-sm-5">
-              </div>
-               <div class="col-sm-5">
-              </div>              
-            </div> 
-            
-                
-
+                <!-- en este div se ingresan los otros con jquery -->
+                <div id="otros_prestamos"> </div>
 
 
               <div class="col-sm-12">
@@ -121,5 +138,29 @@
                 
 </div> 
 
+<script>
+  
+    $(document).ready(function(){
+
+
+      //BOTON AGREGAR otro
+    $('#agregar_prestamo').click(function(){
+      $('#prestamo').clone().removeAttr('style').appendTo( '#otros_prestamos');
+      $('.eliminar').click(function(){
+        $(this).closest("div#prestamo").remove();
+      })
+    })
+
+
+    //CAMBIO DE NOMBRE DE LOS CAMPOS PARA HACERLOS UN ARREGLO
+    $('input[name=institucion]').attr('name', 'institucion[]')
+    $('select[name=tipo_prestamos]').attr('name', 'tipo_prestamos[]')  
+    $('input[name=tasa]').attr('name', 'tasa[]')  
+    $('input[name=monto_original]').attr('name', 'monto_original[]')  
+    $('input[name=plazo_meses]').attr('name', 'plazo_meses[]')  
+    $('select[name=moneda]').attr('name', 'moneda[]')
+  
+  });
+</script>
+
 {% endblock %}  
-     <!-- /.content

@@ -36,6 +36,7 @@ def nueva_ficha(request):
 				ficha.numero_afiliado = None if request.POST.get('numero_afiliado') == '' else request.POST.get('numero_afiliado')
 				ficha.genero = None if request.POST.get('genero') == '' else request.POST.get('genero')
 				ficha.estado_civil = None if request.POST.get('estado_civil') == '' else request.POST.get('estado_civil')
+				ficha.apellido_de_casada = None if request.POST.get('apellido_de_casada') == '' else request.POST.get('apellido_de_casada')
 				ficha.cod_estado = Estados.objects.get(pk=0)
 				ficha.save()
 				return redirect(reverse('nueva_ficha_2', kwargs={'cod_censo': ficha.cod_censo}))
@@ -103,7 +104,7 @@ def nueva_ficha_4(request, cod_censo):
 				ficha.nombres_conyuge = None if request.POST.get('nombres_conyuge') == '' else request.POST.get('nombres_conyuge')
 				ficha.primer_apellido_conyuge = None if request.POST.get('primer_apellido_conyuge') == '' else request.POST.get('primer_apellido_conyuge')
 				ficha.segundo_apellido_conyuge = None if request.POST.get('segundo_apellido_conyuge') == '' else request.POST.get('segundo_apellido_conyuge')
-				apellido_de_casada = None if request.POST.get('apellido_de_casada') == '' else request.POST.get('apellido_de_casada')
+				
 				ficha.save()
 				return redirect(reverse('nueva_ficha_5', kwargs={'cod_censo': ficha.cod_censo}))				
 		except Exception as e:
@@ -117,29 +118,31 @@ def nueva_ficha_5(request, cod_censo):
 	ficha = FichaCenso.objects.get(pk=cod_censo)
 	form1 = FichaCensoForm()
 	if request.POST:
-		try:
-			with transaction.atomic():
-				ficha = FichaCenso.objects.get(cod_censo=cod_censo)
-				ficha.trabaja_actualmente = None if request.POST.get('trabaja_actualmente') == '' else request.POST.get('trabaja_actualmente')
-				ficha.lugar_de_trabajo = None if request.POST.get('lugar_de_trabajo') == '' else request.POST.get('lugar_de_trabajo')
-				ficha.tipo_contratacion = None if request.POST.get('tipo_contratacion') == '' else request.POST.get('tipo_contratacion')
-				ficha.antiguedad_meses = None if request.POST.get('antiguedad_meses') == '' else request.POST.get('antiguedad_meses')
-				ficha.nombre_empresa = None if request.POST.get('nombre_empresa') == '' else request.POST.get('nombre_empresa')
-				ficha.departamento_o_seccion = None if request.POST.get('departamento_o_seccion') == '' else request.POST.get('departamento_o_seccion')
-				ficha.cargo = None if request.POST.get('cargo') == '' else request.POST.get('cargo')
-				ficha.cod_departamento_empresa = Departamentos.objects.get(pk=request.POST.get('cod_departamento_empresa'))
-				ficha.cod_municipio_empresa = Municipios.objects.get(pk=request.POST.get('cod_municipio'))
-				ficha.barrio_o_colonia_empresa = None if request.POST.get('barrio_o_colonia_empresa') == '' else request.POST.get('barrio_o_colonia_empresa')
-				ficha.calle_empresa = None if request.POST.get('calle_empresa') == '' else request.POST.get('calle_empresa')
+		if request.POST['trabaja_actualmente'] == 'False':			
+			return redirect(reverse('nueva_ficha_7', kwargs={'cod_censo': ficha.cod_censo}))
+		else:
+			try:
+				with transaction.atomic():
+					ficha = FichaCenso.objects.get(cod_censo=cod_censo)
+					ficha.trabaja_actualmente = None if request.POST.get('trabaja_actualmente') == '' else request.POST.get('trabaja_actualmente')
+					ficha.lugar_de_trabajo = None if request.POST.get('lugar_de_trabajo') == '' else request.POST.get('lugar_de_trabajo')
+					ficha.tipo_contratacion = None if request.POST.get('tipo_contratacion') == '' else request.POST.get('tipo_contratacion')
+					ficha.antiguedad_meses = None if request.POST.get('antiguedad_meses') == '' else request.POST.get('antiguedad_meses')
+					ficha.nombre_empresa = None if request.POST.get('nombre_empresa') == '' else request.POST.get('nombre_empresa')
+					ficha.departamento_o_seccion = None if request.POST.get('departamento_o_seccion') == '' else request.POST.get('departamento_o_seccion')
+					ficha.cargo = None if request.POST.get('cargo') == '' else request.POST.get('cargo')
+					ficha.cod_departamento_empresa = Departamentos.objects.get(pk=request.POST.get('cod_departamento_empresa'))
+					ficha.cod_municipio_empresa = Municipios.objects.get(pk=request.POST.get('cod_municipio'))
+					ficha.barrio_o_colonia_empresa = None if request.POST.get('barrio_o_colonia_empresa') == '' else request.POST.get('barrio_o_colonia_empresa')
+					ficha.calle_empresa = None if request.POST.get('calle_empresa') == '' else request.POST.get('calle_empresa')
 
-				ficha.save()
-				return redirect(reverse('nueva_ficha_6', kwargs={'cod_censo': ficha.cod_censo}))				
-		except Exception as e:
-			mensaje = 'error'
+					ficha.save()
+					return redirect(reverse('nueva_ficha_6', kwargs={'cod_censo': ficha.cod_censo}))
+			except Exception as e:
+				mensaje = 'error'	
+
 	return render(request, 'nueva_ficha_5.html', {'form1': form1}) 	
 
-
-	# None if request.POST.get('') == '' else request.POST.get('')
 
 		
 
@@ -161,13 +164,10 @@ def nueva_ficha_6(request, cod_censo):
 				ficha.celular_empresa = None if request.POST.get('celular_empresa') == '' else request.POST.get('celular_empresa')
 				ficha.correo_electronico_empresa = None if request.POST.get('correo_electronico_empresa') == '' else request.POST.get('correo_electronico_empresa')
 				ficha.save()
-				return redirect(reverse('nueva_ficha_7', kwargs={'cod_censo': ficha.cod_censo}))				
+				return redirect(reverse('nueva_ficha_7', kwargs={'cod_censo': ficha.cod_censo}))			
 		except Exception as e:
 			mensaje = 'error'
-	return render(request, 'nueva_ficha_6.html', {'form1': form1}) 
-		
-
-			
+	return render(request, 'nueva_ficha_6.html', {'form1': form1}) 			
 
 
 def nueva_ficha_7(request, cod_censo):
@@ -203,39 +203,59 @@ def nueva_ficha_8(request, cod_censo):
 			with transaction.atomic():
 				ficha = FichaCenso.objects.get(cod_censo=cod_censo)
 				ficha.hijos = None if request.POST.get('hijos') == '' else request.POST.get('hijos')
-				ficha.cantidad_hijos = None if request.POST.get('cantidad_hijos') == '' else request.POST.get('cantidad_hijos')
+				ficha.cantidad_de_hijos = None if request.POST.get('cantidad_de_hijos') == '' else request.POST.get('cantidad_de_hijos')
 				ficha.save()
-				return redirect(reverse('ingresar_hijos', kwargs={'cod_censo': ficha.cod_censo, 'cantidad': ficha.cantidad_hijos}))				
+				return redirect(reverse('ingresar_hijos', kwargs={'cod_censo': ficha.cod_censo, 'cantidad': ficha.cantidad_de_hijos}))				
 		except Exception as e:
-			mensaje = 'error'
-	return render(request, 'nueva_ficha_8.html', {'form1': form1}) 		
+			raise e
+	return render(request, 'nueva_ficha_8.html', {'form1': form1}) 	
 
 
 
 def ingresar_hijos(request, cod_censo, cantidad):
-	ficha = FichaCenso.objects.get(pk=cod_censo)
-	ficha.cod_censo = ficha
-	print cantidad
+	print cantidad, 'alsdjkaskjdhaksjdhaksjdhakjsh'
+	ficha = FichaCenso.objects.get(pk=cod_censo)	
 	form1 = FichaCensoForm()	
 	hijos = HijosForm()
+	
 	if request.POST:
 		try:
 			with transaction.atomic():
-				ingresoHijo = Hijos()	
-				ingresoHijo.cod_censo = FichaCenso.objects.get(pk=request.POST.get('cod_censo'))		
-				ingresoHijo.num_hijo = None if request.POST.get('num_hijo') == '' else request.POST.get('num_hijo')
-				ingresoHijo.nombre_hijo = None if request.POST.get('nombre_hijo') == '' else request.POST.get('nombre_hijo')
-				ingresoHijo.edad = None if request.POST.get('edad') == '' else request.POST.get('edad')
-				ingresoHijo.estudia_trabaja = None if request.POST.get('estudia_trabaja') == '' else request.POST.get('estudia_trabaja')
-				ingresoHijo.nivel_estudio = None if request.POST.get('nivel_estudio') == '' else request.POST.get('nivel_estudio')
-				ingresoHijo.institucion_estudio = None if request.POST.get('institucion_estudio') == '' else request.POST.get('institucion_estudio')
-				ingresoHijo.institucion_trabajo = None if request.POST.get('institucion_trabajo') == '' else request.POST.get('institucion_trabajo')
-				ingresoHijo.sueldo = None if request.POST.get('sueldo') == '' else request.POST.get('sueldo')
-				ingresoHijo.save()
+
+				num_hijo = request.POST.getlist('num_hijo[]')
+				nombre_hijo = request.POST.getlist('nombre_hijo[]')
+				edad = request.POST.getlist('edad[]')
+				estudia_trabaja = request.POST.getlist('estudia_trabaja[]')
+				nivel_estudio = request.POST.getlist('nivel_estudio[]')
+				institucion_estudio = request.POST.getlist('institucion_estudio[]')
+				institucion_trabajo = request.POST.getlist('institucion_trabajo[]')
+				sueldo = request.POST.getlist('sueldo[]')
+				
+				counter = 0
+				for x in nombre_hijo: #elijo un campo del modelo
+					
+					ingresoHijo = Hijos()
+					ingresoHijo.cod_censo = FichaCenso.objects.get(pk=cod_censo)
+					ingresoHijo.num_hijo = None if num_hijo[counter] == '' else num_hijo[counter]
+					ingresoHijo.nombre_hijo = None if nombre_hijo[counter] == '' else nombre_hijo[counter]
+					ingresoHijo.edad = None if edad[counter] == '' else edad[counter]
+					ingresoHijo.estudia_trabaja = None if estudia_trabaja[counter] == '' else estudia_trabaja[counter]
+					ingresoHijo.nivel_estudio = None if nivel_estudio[counter] == '' else nivel_estudio[counter]
+					ingresoHijo.institucion_estudio = None if institucion_estudio[counter] == '' else institucion_estudio[counter]
+					ingresoHijo.institucion_trabajo = None if institucion_trabajo[counter] == '' else institucion_trabajo[counter]
+					ingresoHijo.sueldo = None if sueldo[counter] == '' else sueldo[counter]	
+					ingresoHijo.save()
+					counter += 1				
+			
 				return redirect(reverse('nueva_ficha_9', kwargs={'cod_censo': ficha.cod_censo}))				
 		except Exception as e:
+			raise e
 			mensaje = 'error'
-	return render(request, 'ingresar_hijos.html', {'form1': form1, 'hijos': hijos, 'cantidad': cantidad}) 
+	ctx = {	'form1': form1,
+			'hijos': hijos,
+			'cantidad': range(0,int(cantidad)),
+		}
+	return render(request, 'ingresar_hijos.html', ctx) 
 
 	
 
@@ -287,16 +307,12 @@ def nueva_ficha_10(request, cod_censo):
 		except Exception as e:
 			mensaje = 'error'
 	return render(request, 'nueva_ficha_10.html', {'form1': form1}) 
-	
-
-
-
-
 
 
 def nueva_ficha_11(request, cod_censo):
 	ficha = FichaCenso.objects.get(pk=cod_censo)
 	form1 = FichaCensoForm()
+	prestamos = PrestamosForm()
 	if request.POST:
 		try:
 			with transaction.atomic():
@@ -304,10 +320,33 @@ def nueva_ficha_11(request, cod_censo):
 				ficha.prestamos_otros = None if request.POST.get('prestamos_otros') == '' else request.POST.get('prestamos_otros')
 				ficha.tipo_institucion_prestamos = None if request.POST.get('tipo_institucion_prestamos') == '' else request.POST.get('tipo_institucion_prestamos')
 				ficha.save()
+
+				institucion = request.POST.getlist('institucion[]')
+				tipo_prestamos = request.POST.getlist('tipo_prestamos[]')
+				moneda = request.POST.getlist('moneda[]')
+				tasa = request.POST.getlist('tasa[]')
+				monto_original = request.POST.getlist('monto_original[]')
+				plazo_meses = request.POST.getlist('plazo_meses[]')
+
+				counter = 0
+
+				for x in institucion:
+					prestamo = Prestamos()
+					prestamo.cod_censo = FichaCenso.objects.get(pk=cod_censo)
+					prestamo.institucion = None if institucion[counter] == '' else institucion[counter]
+					prestamo.tipo_prestamos = None if tipo_prestamos[counter] == '' else tipo_prestamos[counter]
+					prestamo.moneda = None if moneda[counter] == '' else moneda[counter]
+					prestamo.tasa = None if tasa[counter] == '' else tasa[counter]
+					prestamo.monto_original = None if monto_original[counter] == '' else monto_original[counter]
+					prestamo.plazo_meses = None if plazo_meses[counter] == '' else plazo_meses[counter]
+
+					prestamo.save()
+					counter += 1
+
 				return redirect(reverse('nueva_ficha_12', kwargs={'cod_censo': ficha.cod_censo}))				
 		except Exception as e:
-			mensaje = 'error'
-	return render(request, 'nueva_ficha_11.html', {'form1': form1})
+			raise e
+	return render(request, 'nueva_ficha_11.html', {'form1': form1, 'prestamos': prestamos})
 
 
 
@@ -392,13 +431,14 @@ def nueva_ficha_15(request, cod_censo):
 				ficha = FichaCenso.objects.get(cod_censo=cod_censo)
 				ficha.fecha_censo = None if request.POST.get('fecha_censo') == '' else request.POST.get('fecha_censo')
 				ficha.cod_usuario = None if request.POST.get('cod_usuario') == '' else request.POST.get('cod_usuario')
-				ficha.departamento_encuesta = Departamentos.objects.get(pk=request.POST.get('departamento_encuesta'))
-				ficha.municipio_encuesta = Municipios.objects.get(pk=request.POST.get('municipio_encuesta'))
+				ficha.departamento_encuesta = Departamentos.objects.get(pk=request.POST.get('departamento_encuesta')) #el atributo 'name' del elemento <select>
+				ficha.municipio_encuesta = Municipios.objects.get(pk=request.POST.get('cod_municipio')) #el atributo 'name' del elemento <select>
 				ficha.filial_encuesta = Filiales.objects.get(pk=request.POST.get('filial_encuesta'))
+				ficha.cod_estado = Estados.objects.get(pk=1)
 				ficha.save()
 				return redirect(reverse('menu_principal', kwargs={}))			
 		except Exception as e:
-			mensaje = 'error'
+			raise e
 	return render(request, 'nueva_ficha_15.html', {'form1': form1})
 
 

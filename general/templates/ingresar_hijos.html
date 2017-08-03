@@ -13,9 +13,7 @@
 
 <link rel="stylesheet" href="{% static 'plugins/select2/select2.min.css' %}">
 <link rel="stylesheet" href="{% static 'plugins/select2/select2-bootstrap.min.css' %}">
-<link rel="stylesheet" href="{% static 'plugins/bootstrap-datepicker/css/bootstrap-datepicker.css' %}">
-<script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
-<script src="{% static 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js' %}"></script>
+
 
 
 <style>
@@ -53,13 +51,14 @@
 <div class="box box-primary with-border">
         <div class="box-body">
         <p class="pull-right">Fecha: {% now 'd-m-Y' %}</p>
-        <h5 class="text-center sub-style">INGRESAR HIJOS  </h5><hr>        
+        <h5 class="text-center sub-style">INGRESAR HIJOS </h5><hr>        
           
           <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
          
           
-            {%  for cant in cantidad  %}
+              {% for i in cantidad %}
                 <div class="row">
+            
               <div class="col-sm-5">
                   {{hijos.num_hijo|bootstrap_horizontal:'col-xs-5'}}
               </div>
@@ -94,26 +93,10 @@
                {{hijos.sueldo|bootstrap_horizontal:'col-xs-5'}}
               </div>              
             </div><hr>
+           
 
-
-
-            {%  endfor  %}
-
-              
-              
-       
-                    
-
-             <!-- formato correcto -->
-            <div class="row">
-              <div class="col-sm-5">
-              </div>
-               <div class="col-sm-5">
-              </div>              
-            </div> 
-            <hr>               
-
-
+            {% endfor %}
+ 
 
               <div class="col-sm-12">
                  <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button>
@@ -123,7 +106,7 @@
 
         </div>                                   
            
-                 <!--  <button type="reset" class="btn btn-default btn-md"><i class="glyphicon glyphicon-repeat"></i> Limpiar</button>      -->                          
+                          
                
       </form>
 
@@ -132,6 +115,37 @@
                 
 </div> 
 
+<script>
+
+
+  $(document).ready(function(){
+
+
+    //CAMBIO DE NOMBRE DE LOS CAMPOS PARA HACERLOS UN ARREGLO
+    $('input[name=num_hijo]').attr('name', 'num_hijo[]')
+    $('input[name=nombre_hijo]').attr('name', 'nombre_hijo[]')
+    $('input[name=edad]').attr('name', 'edad[]')
+    $('select[name=estudia_trabaja]').attr('name', 'estudia_trabaja[]')
+    $('select[name=nivel_estudio]').attr('name', 'nivel_estudio[]')
+    $('select[name=institucion_estudio]').attr('name', 'institucion_estudio[]')
+    $('select[name=institucion_trabajo]').attr('name', 'institucion_trabajo[]')
+    $('input[name=sueldo]').attr('name', 'sueldo[]')
+
+  });
+
+    $('#id_nombre_hijo').keydown(function(e) {
+      if (e.ctrlKey || e.altKey) {
+        e.preventDefault();
+      } else {
+        var key = e.keyCode;
+        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+          e.preventDefault();
+        }
+      }
+    });
+  
+  
+</script>
 
 {% endblock %}  
      <!-- /.content -->

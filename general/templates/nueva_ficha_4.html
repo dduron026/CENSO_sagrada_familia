@@ -65,16 +65,16 @@
               {{form1.conyuge|bootstrap_horizontal:'col-xs-5'}}
               </div>
               <div class="col-sm-5"> 
-               {{form1.apellido_de_casada|bootstrap_horizontal:'col-xs-5'}}
+               
               </div>
                             
             </div> 
 
             <div class="row">
-            <div class="col-sm-5"> 
+            <div class="col-sm-5" style="display: none;" id="id_identidad_conyuge"> 
                {{form1.identidad_conyuge|bootstrap_horizontal:'col-xs-5'}}
               </div> 
-              <div class="col-sm-5">
+              <div class="col-sm-5" style="display: none;" id="id_nombres_conyuge">
               {{form1.nombres_conyuge|bootstrap_horizontal:'col-xs-5'}}
               </div>
                              
@@ -82,46 +82,67 @@
 
 
             <div class="row">
-            <div class="col-sm-5"> 
+            <div class="col-sm-5" style="display: none;" id="id_primer_apellido_conyuge"v> 
                {{form1.primer_apellido_conyuge|bootstrap_horizontal:'col-xs-5'}}
               </div>
-              <div class="col-sm-5">
+              <div class="col-sm-5" style="display: none;" id="id_segundo_apellido_conyuge">
               {{form1.segundo_apellido_conyuge|bootstrap_horizontal:'col-xs-5'}}
               </div>
                             
-            </div>          
-            
-    
-         
-
-             <!-- formato correcto -->
-            <div class="row">
-              <div class="col-sm-5">
-              </div>
-               <div class="col-sm-5">
-              </div>              
-            </div> 
-            <hr>
-                
-
-
-
+            </div><hr>   
               <div class="col-sm-12">
-                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button> 
-                 <a href="">siguiente</a>               
-              </div>
-
-
-        </div>                                   
-           
-                 <!--  <button type="reset" class="btn btn-default btn-md"><i class="glyphicon glyphicon-repeat"></i> Limpiar</button>      -->                          
-               
+                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button>
+              </div>    
+        </div>               
       </form>
-
-                 
-     </div>
-                
+     </div>                
 </div> 
+
+<script>
+  
+  $(document).ready(function(){    
+
+    $('input[name=conyuge]').change(function(){
+      if ($('input[name=conyuge]:checked').val() == 'True' ) {
+        $('#id_identidad_conyuge, #id_nombres_conyuge, #id_primer_apellido_conyuge, #id_segundo_apellido_conyuge').show()
+      }else{
+        $('#id_identidad_conyuge, #id_nombres_conyuge, #id_primer_apellido_conyuge, #id_segundo_apellido_conyuge').hide()
+
+      }
+     
+    });
+
+    // SOLO LETRAS
+
+    $('#id_nombres_conyuge, #id_primer_apellido_conyuge, #id_segundo_apellido_conyuge').keydown(function(e) {
+      if (e.shiftKey || e.ctrlKey || e.altKey) {
+        e.preventDefault();
+      } else {
+        var key = e.keyCode;
+        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+          e.preventDefault();
+        }
+      }
+    });
+
+
+    $('#id_identidad_conyuge').keydown(function(event) {
+      // Allow special chars + arrows
+      if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9
+        || event.keyCode == 27 || event.keyCode == 13
+        || (event.keyCode == 65 && event.ctrlKey === true)
+        || (event.keyCode >= 35 && event.keyCode <= 39)){
+          return;
+      }else {
+        // If it's not a number stop the keypress
+        if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+          event.preventDefault();
+        }
+      }
+    });
+
+  });
+</script>
 
 
 

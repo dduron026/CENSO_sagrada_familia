@@ -50,6 +50,7 @@ class FichaCenso(models.Model):
 	numero_afiliado = models.CharField(db_column='NumeroAfiliado', max_length=15, blank=True, null=True)  # Field name made lowercase.
 	genero = models.CharField(db_column='Genero', max_length=1, blank=True, null=True)  # Field name made lowercase.
 	estado_civil = models.CharField(db_column='EstadoCivil', max_length=1, blank=True, null=True)  # Field name made lowercase.
+	apellido_de_casada = models.CharField(db_column='ApellidoCasada', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	
 	# VISTA 2
 	nivel_educativo = models.CharField(db_column='NivelEducativo', max_length=1, blank=True, null=True)  # Field name made lowercase.
@@ -62,21 +63,21 @@ class FichaCenso(models.Model):
 	calle_domicilio = models.CharField(db_column='CalleDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.    
 	avenida_domicilio = models.CharField(db_column='AvenidaDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.    
 	bloque_domicilio = models.CharField(db_column='BloqueDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.
-	no_casa_domicilio = models.CharField(db_column='NoCasaDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.
+	no_casa_domicilio = models.CharField(db_column='NoCasaDomicilio', max_length=15, blank=True, null=True)  # Field name made lowercase.
 	color_domicilio = models.CharField(db_column='ColorDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	punto_referencia_domicilio = models.CharField(db_column='PuntoReferenciaDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.
-	telefono_fijo_domicilio = models.CharField(db_column='TelefonoFijoDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.
-	telefono_otro_domicilio = models.CharField(db_column='TelefonoOtroDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.
-	celular_domicilio = models.CharField(db_column='CelularDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.
+	telefono_fijo_domicilio = models.CharField(db_column='TelefonoFijoDomicilio', max_length=8, blank=True, null=True)  # Field name made lowercase.
+	telefono_otro_domicilio = models.CharField(db_column='TelefonoOtroDomicilio', max_length=8, blank=True, null=True)  # Field name made lowercase.
+	celular_domicilio = models.CharField(db_column='CelularDomicilio', max_length=8, blank=True, null=True)  # Field name made lowercase.
 	correo_electronico_domicilio = models.CharField(db_column='CorreoElectronicoDomicilio', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	
 	# VISTA 4
 	conyuge = models.NullBooleanField(db_column='Conyuge')  # Field name made lowercase.   
-	identidad_conyuge = models.CharField(db_column='IdentidadConyuge', max_length=50, blank=True, null=True)  # Field name made lowercase.
+	identidad_conyuge = models.CharField(db_column='IdentidadConyuge', max_length=15, blank=True, null=True)  # Field name made lowercase.
 	nombres_conyuge = models.CharField(db_column='NombresConyuge', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	primer_apellido_conyuge = models.CharField(db_column='PrimerApellidoConyuge', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	segundo_apellido_conyuge = models.CharField(db_column='SegundoApellidoConyuge', max_length=50, blank=True, null=True)  # Field name made lowercase.
-	apellido_de_casada = models.CharField(db_column='ApellidoCasada', max_length=50, blank=True, null=True)  # Field name made lowercase.
+	
 	
 	# VISTA 5
 	trabaja_actualmente = models.NullBooleanField(db_column='TrabajaActualmente')  # Field name made lowercase.
@@ -117,7 +118,7 @@ class FichaCenso(models.Model):
 	
 	# VISTA 8
 	hijos = models.NullBooleanField(db_column='Hijos')  # Field name made lowercase.
-	cantidad_hijos = models.IntegerField(db_column='CantidadHijos', blank=True, null=True) 
+	cantidad_de_hijos = models.IntegerField(db_column='CantidadHijos', blank=True, null=True) 
 
 	# VISTA 9......
 	hijos_afiliados = models.NullBooleanField(db_column='HijosAfiliados')  # Field name made lowercase.
@@ -167,14 +168,14 @@ class FichaCenso(models.Model):
 	internet = models.NullBooleanField(db_column='Internet')  # Field name made lowercase.
 	
 	# VISTA 14
-	remesas_extrajero = models.NullBooleanField(db_column='RemesasExtrajero')  # Field name made lowercase.
-	pais_remesas = models.CharField(db_column='PaisRemesas', max_length=100, blank=True, null=True)  # Field name made lowercase.
-	ciudad_remesas = models.CharField(db_column='CiudadRemesas', max_length=100, blank=True, null=True)  # Field name made lowercase.
-	quien_envia = models.CharField(db_column='QuienEnvia', max_length=100, blank=True, null=True)  # Field name made lowercase.
-	uso_remesas = models.CharField(db_column='UsoRemesas', max_length=1, blank=True, null=True)  # Field name made lowercase.
-	empresa_remesas = models.CharField(db_column='EmpresaRemesas', max_length=1, blank=True, null=True)  # Field name made lowercase.
-	cada_cuanto_recibe = models.CharField(db_column='CadaCuantoRecibe', max_length=1, blank=True, null=True)  # Field name made lowercase.
-	promedio_remesas = models.CharField(db_column='PromedioRemesas', max_length=1, blank=True, null=True)  # Field name made lowercase.
+	remesas_extrajero = models.NullBooleanField(db_column='RemesasExtrajero')  
+	pais_remesas = models.CharField(db_column='PaisRemesas', max_length=100, blank=True, null=True)  
+	ciudad_remesas = models.CharField(db_column='CiudadRemesas', max_length=100, blank=True, null=True) 
+	quien_envia = models.CharField(db_column='QuienEnvia', max_length=100, blank=True, null=True)  
+	uso_remesas = models.CharField(db_column='UsoRemesas', max_length=1, blank=True, null=True)  
+	empresa_remesas = models.CharField(db_column='EmpresaRemesas', max_length=1, blank=True, null=True)  
+	cada_cuanto_recibe = models.CharField(db_column='CadaCuantoRecibe', max_length=1, blank=True, null=True)  
+	promedio_remesas = models.CharField(db_column='PromedioRemesas', max_length=1, blank=True, null=True)  
 	
 	# VISTA 15
 	fecha_censo = models.DateTimeField(db_column='FechaCenso', blank=True, null=True)  # Field name made lowercase.
@@ -246,7 +247,7 @@ class Prestamos(models.Model):
 	cod_prestamos = models.AutoField(db_column='CodPrestamos', primary_key=True)  # Field name made lowercase.
 	cod_censo = models.ForeignKey(FichaCenso, models.DO_NOTHING, db_column='CodCenso', blank=True, null=True)  # Field name made lowercase.
 	institucion = models.CharField(db_column='Institucion', max_length=100, blank=True, null=True)  # Field name made lowercase.
-	tipo_prestamos = models.IntegerField(db_column='TipoPrestamos', blank=True, null=True)  # Field name made lowercase.
+	tipo_prestamos = models.CharField(db_column='TipoPrestamos', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	moneda = models.CharField(db_column='Moneda', max_length=1, blank=True, null=True)  # Field name made lowercase.
 	tasa = models.DecimalField(db_column='Tasa', max_digits=8, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
 	monto_original = models.DecimalField(db_column='MontoOriginal', max_digits=17, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
