@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+
+{% block title %} Nueva Ficha {% endblock %}
+        
+{% block contenido %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+<script src="{% static 'plugins/select2/select2.min.js' %}"></script>
+
+<link rel="stylesheet" href="{% static 'plugins/select2/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/select2/select2-bootstrap.min.css' %}">
+
+
+
+<style>
+  .select2-container .select2-selection--single .select2-selection__rendered{
+    margin-top: 0px;
+  }
+  .nav-tabs-custom > .nav-tabs > li.active{
+    border-top-color:#00a65a;
+  }
+  .sub-style {
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    color: green;
+    font-size: 12;
+    font-weight: bold;
+  }
+  .loader {
+      display: none;
+      animation: spin 2s linear infinite;
+      position:   fixed;
+      z-index:    1000;
+      top:        0;
+      left:       0;
+      height:     100%;
+      width:      100%;
+      background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+  }
+
+
+
+</style>
+
+<div class="box box-primary with-border">
+        <div class="box-body">
+        <p class="pull-right">Fecha: {% now 'd-m-Y' %}</p>
+        <h5 class="text-center sub-style">C. ARRAIGO </h5><hr>
+
+          <div id="prestamo" class="prestamo_copia" style="display: none">
+
+            <div class="row">
+              <div class="col-sm-5">
+                {{prestamos.institucion|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-5">
+                {{prestamos.tipo_prestamos|bootstrap_horizontal:'col-xs-5'}}
+              </div> 
+              </div>     
+
+
+            <div class="row">
+              <div class="col-sm-5">
+                {{prestamos.moneda|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-5">
+                {{prestamos.tasa|bootstrap_horizontal:'col-xs-5'}}
+              </div>          
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-5">
+                {{prestamos.monto_original|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-5">
+                {{prestamos.plazo_meses|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-2">
+                <button type="button" class="btn btn-danger pull-right eliminar">Eliminar</button>
+              </div>
+            
+            </div><hr>
+           
+              
+          </div><br><hr>
+
+      <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
+         
+            
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.prestamos_otros|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                  {{form1.tipo_institucion_prestamos|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+
+  
+        <p class="page-header"></p>
+        <p class="text-center sub-style">
+        INGRESAR PRESTAMOS
+        </p>
+
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="button" class="btn btn-default pull-right" id='agregar_prestamo'>Nuevo Préstamo</button>
+                <br><br><br>
+              </div>
+            </div><hr>         
+
+                <!-- en este div se ingresan los otros con jquery -->
+                <div id="otros_prestamos"> </div>
+
+
+              <div class="col-sm-12">
+                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button>
+                             
+              </div>
+
+
+        </div>                                   
+                                     
+               
+      </form>
+
+                 
+     </div>
+                
+</div> 
+
+<script>
+  
+    $(document).ready(function(){
+
+
+      //BOTON AGREGAR otro
+    $('#agregar_prestamo').click(function(){
+      $('#prestamo').clone().removeAttr('style').appendTo( '#otros_prestamos');
+      $('.eliminar').click(function(){
+        $(this).closest("div#prestamo").remove();
+      })
+    })
+
+
+    //CAMBIO DE NOMBRE DE LOS CAMPOS PARA HACERLOS UN ARREGLO
+    $('input[name=institucion]').attr('name', 'institucion[]')
+    $('select[name=tipo_prestamos]').attr('name', 'tipo_prestamos[]')  
+    $('input[name=tasa]').attr('name', 'tasa[]')  
+    $('input[name=monto_original]').attr('name', 'monto_original[]')  
+    $('input[name=plazo_meses]').attr('name', 'plazo_meses[]')  
+    $('select[name=moneda]').attr('name', 'moneda[]')
+  
+  });
+</script>
+
+{% endblock %}  

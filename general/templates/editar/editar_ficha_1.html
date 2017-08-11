@@ -57,19 +57,6 @@
     position: relative;
   }
 
- /*para efecto de flecha*/
-/*.error:before{ 
-    content: '';
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-right: 8px solid #BC1010;
-    border-left: 8px solid transparent;
-    left: -16px;
-    position: absolute;
-    top: 5px;
-  }  
-*/
-
 
 </style>
 
@@ -130,6 +117,9 @@
               <div class="col-sm-5">
                  {{form1.cod_departament_nacimiento|bootstrap_horizontal:'col-xs-5'}}
               </div>
+<!--               <div class="col-sm-5">
+                 {{form1.cod_municipio_nacimiento|bootstrap_horizontal:'col-xs-5'}}
+              </div> -->
 
                <div class="col-sm-5">
                <label for="id_cod_municipio_nacimiento" class="col-xs-5 control-label">Municipio nacimiento</label>
@@ -251,12 +241,15 @@
     $('#id_cod_departament_nacimiento').change(function(){
       $('#id_cod_municipio_nacimiento').empty();
       $('#id_cod_municipio_nacimiento').append("<option value=''>-----------</option>");
-       cod_departament_nacimiento = $(this).val()
-       $.ajax({
+    
+       cod_departament_nacimiento = $(this).find(":selected").val();
+
+          $.ajax({
           type: "GET",
           data: { cod_departament_nacimiento: cod_departament_nacimiento },
           url: "{% url 'ajax' %}",
           success: function(response){
+            console.log(response);
            $.each(response, function(key, val){
               $('#id_cod_municipio_nacimiento').append("<option value="+val.cod_municipio+">" + val.desc_municipio + "</option>");
             });

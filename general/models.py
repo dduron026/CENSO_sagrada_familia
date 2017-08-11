@@ -33,9 +33,13 @@ class Estados(models.Model):
 		managed = False
 		db_table = 'Censo].[Estados'
 
+	def __unicode__(self):
+		return self.desc_estado	
+
 
 class FichaCenso(models.Model):
 	cod_censo = models.AutoField(db_column='CodCenso', primary_key=True)  # Field name made lowercase.
+	cod_vista = models.IntegerField(db_column='CodVista', blank=True, null=True)
 	cod_estado = models.ForeignKey(Estados, models.DO_NOTHING, db_column='CodEstado', blank=True, null=True)  # Field name made lowercase.
 	cod_encuestador = models.ForeignKey(Encuestadores, models.DO_NOTHING, db_column='CodEncuestador', blank=True, null=True)  # Field name made lowercase.
 	#primera vista
@@ -99,9 +103,9 @@ class FichaCenso(models.Model):
 	color_empresa = models.CharField(db_column='ColorEmpresa', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	etapa_empresa = models.CharField(db_column='EtapaEmpresa', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	punto_referencia_empresa = models.CharField(db_column='PuntoReferenciaEmpresa', max_length=50, blank=True, null=True)  # Field name made lowercase.
-	telefono_fijo_empresa = models.CharField(db_column='TelefonoFijoEmpresa', max_length=50, blank=True, null=True)  # Field name made lowercase.
-	telefono_otro_empresa = models.CharField(db_column='TelefonoOtroEmpresa', max_length=50, blank=True, null=True)  # Field name made lowercase.
-	celular_empresa = models.CharField(db_column='CelularEmpresa', max_length=50, blank=True, null=True)  # Field name made lowercase.
+	telefono_fijo_empresa = models.CharField(db_column='TelefonoFijoEmpresa', max_length=8, blank=True, null=True)  # Field name made lowercase.
+	telefono_otro_empresa = models.CharField(db_column='TelefonoOtroEmpresa', max_length=8, blank=True, null=True)  # Field name made lowercase.
+	celular_empresa = models.CharField(db_column='CelularEmpresa', max_length=8, blank=True, null=True)  # Field name made lowercase.
 	correo_electronico_empresa = models.CharField(db_column='CorreoElectronicoEmpresa', max_length=50, blank=True, null=True)  # Field name made lowercase.
 	
 	# VISTA 7

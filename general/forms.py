@@ -352,7 +352,7 @@ class FichaCensoForm(ModelForm):
 	asambleas_sectoriales = forms.ChoiceField(widget=RadioSelect, choices=ASAMBLEAS, label='Asambleas sectoriales', required=False)
 	prestamos_otros = forms.ChoiceField(widget=RadioSelect, choices=PRESTAMOS_OTROS, label='Tiene Préstamo con otra institución', required=False)
 	tipo_institucion_prestamos = forms.ChoiceField(choices=INSTITUCION_OTROS_PRESTAMOS, label='Con qué otra institución tiene Préstamo', required=False)
-	destino_pendiente_pago = forms.ChoiceField(choices=OTROS_PRESTAMOS_DESTINO, label='los Préstamos pendientes de pago fueron para', required=False)
+	destino_pendiente_pago = forms.ChoiceField(choices=OTROS_PRESTAMOS_DESTINO, label='Los Préstamos pendientes de pago fueron para', required=False)
 	cuenta_ahorro_otro = forms.ChoiceField(widget=RadioSelect, choices=CUENTA_AHORRO_OTRO, label='Tiene cuenta de ahorro en otra institución', required=False)
 	tipo_cuenta_ahorro = forms.ChoiceField(choices=TIPO_CUENTA_AHORRO, label='Qué tipo de cuenta de ahorro mantiene con esas instituciones', required=False)
 	tarjeta_credito = forms.ChoiceField(widget=RadioSelect, choices=TARJETA_CREDITO, label='Tiene tarjeta de crédito', required=False)
@@ -365,7 +365,7 @@ class FichaCensoForm(ModelForm):
 	uso_remesas = forms.ChoiceField(choices=USO_REMESAS, label='Para qué usa el dinero que recibe del extranjero', required=False)
 	empresa_remesas = forms.ChoiceField(choices=EMPRESA_REMESAS, label='Por qué empresa recibe o envía sus remesas', required=False)
 	cada_cuanto_recibe = forms.ChoiceField(choices=CADA_CUANTO_RECIBE, label='Cada cuánto le envía remesas', required=False)
-	promedio_remesas = forms.ChoiceField(choices=PROMEDIO_REMESAS, label='valor promedio de remesas que recibe', required=False)
+	promedio_remesas = forms.ChoiceField(choices=PROMEDIO_REMESAS, label='Valor promedio de remesas que recibe', required=False)
 	tipo_afiliado = forms.ChoiceField(choices=TIPO_AFILIADO, label='Tipo de Afiliado', required=False)
 	class Meta:
 		model = FichaCenso
@@ -384,7 +384,7 @@ class FichaCensoForm(ModelForm):
 		'cantidad_personas': ('Cantidad de personas que viven en la casa'),
 		'numero_ninos': ('Cantidad de Niños'), 'numero_adolescentes': ('Cantidad de adololescentes'),
 		'mayores_edad': ('Cantidad de mayores de edad'), 'mayores_a_60': ('Cantidad de mayores a 60'),
-		'anos_afiliacion': ('cuantos años tiene de ser afiliado'), 'nombre_institucion_ahorro': ('Nombre institución de ahorro'),
+		'anos_afiliacion': ('Cuantos años tiene de ser afiliado'), 'nombre_institucion_ahorro': ('Nombre institución de ahorro'),
 		'otros_tipo_cuenta':('Otras (especifique)'),'nombre_institucion_tarjeta':('Con que institución(es) tiene tarjeta de crédito'),
 		'nombre_institucion_casa': ('Banco'),'pais_remesas': ('De qué país'),'ciudad_remesas':('Ciudad'),
 		'quien_envia': ('Quien le envía'), 'cod_usuario': ('Código del Usuario'),

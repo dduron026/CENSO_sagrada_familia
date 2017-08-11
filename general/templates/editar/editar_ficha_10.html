@@ -51,56 +51,58 @@
 <div class="box box-primary with-border">
         <div class="box-body">
         <p class="pull-right">Fecha: {% now 'd-m-Y' %}</p>
-        <h5 class="text-center sub-style">D: REMESAS </h5><hr>        
+        <h5 class="text-center sub-style">B. INFORMACION LABORAL  </h5><hr>        
           
           <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > {% csrf_token %}
-          
-               <div class="row">
-              <div class="col-sm-5">
-                  {{form1.remesas_extrajero|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                  {{form1.pais_remesas|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div>
-
-            <div class="row">
-              <div class="col-sm-5">
-                  {{form1.ciudad_remesas|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                  {{form1.quien_envia|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div>
-
-            <div class="row">
-              <div class="col-sm-5">
-                  {{form1.uso_remesas|bootstrap_horizontal:'col-xs-5'}}
-              </div>
-               <div class="col-sm-5">
-                  {{form1.empresa_remesas|bootstrap_horizontal:'col-xs-5'}}
-              </div>              
-            </div>
-
-            <div class="row">
-              <div class="col-sm-5">
-              {{form1.cada_cuanto_recibe|bootstrap_horizontal:'col-xs-5'}}
          
+            
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.mayores_edad|bootstrap_horizontal:'col-xs-5'}}
               </div>
                <div class="col-sm-5">
-                  {{form1.promedio_remesas|bootstrap_horizontal:'col-xs-5'}}
+                  {{form1.mayores_a_60|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>   <hr>
+            <h5 class="text-center sub-style">C: ARRAIGO  </h5><hr>
+
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.anos_afiliacion|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                  {{form1.tipo_afiliado|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div> 
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.cod_filial_afiliacion|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                  {{form1.cod_filial_visita|bootstrap_horizontal:'col-xs-5'}}
+              </div>              
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                  {{form1.cursos_capacitaciones|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+               <div class="col-sm-5">
+                  {{form1.asambleas_sectoriales|bootstrap_horizontal:'col-xs-5'}}
               </div>              
             </div><hr>
-            
+
               <div class="col-sm-12">
                  <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button>
                              
               </div>
 
 
-        </div>                                   
+        </div>                              
            
-                 <!--  <button type="reset" class="btn btn-default btn-md"><i class="glyphicon glyphicon-repeat"></i> Limpiar</button>      -->                          
+                       
                
       </form>
 

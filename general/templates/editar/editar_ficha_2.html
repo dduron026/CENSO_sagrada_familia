@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+
+{% block title %} Nueva Ficha {% endblock %}
+        
+{% block contenido %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+<script src="{% static 'plugins/select2/select2.min.js' %}"></script>
+
+<link rel="stylesheet" href="{% static 'plugins/select2/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/select2/select2-bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/bootstrap-datepicker/css/bootstrap-datepicker.css' %}">
+<script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js' %}"></script>
+
+
+<style>
+  .select2-container .select2-selection--single .select2-selection__rendered{
+    margin-top: 0px;
+  }
+  .nav-tabs-custom > .nav-tabs > li.active{
+    border-top-color:#00a65a;
+  }
+  .sub-style {
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    color: green;
+    font-size: 12;
+    font-weight: bold;
+  }
+  .loader {
+      display: none;
+      animation: spin 2s linear infinite;
+      position:   fixed;
+      z-index:    1000;
+      top:        0;
+      left:       0;
+      height:     100%;
+      width:      100%;
+      background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+  }
+
+
+
+</style>
+
+<div class="box box-primary with-border">
+        <div class="box-body">
+        <p class="pull-right">Fecha: {% now 'd-m-Y' %}</p>
+        <h5 class="text-center sub-style">A. DATOS GENERALES DEL AFILIADO </h5><hr>        
+          
+          <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' > <!-- novalidate -->
+            {% csrf_token %}
+            <!-- <p class="page-header"></p> -->
+
+           
+         
+              <!-- <h5 class="text-center sub-style"><b>Identificación:</b></h5><hr> -->
+
+            <div class="row">            
+              <div class="col-sm-5">
+               {{form1.nivel_educativo|bootstrap_horizontal:'col-xs-5'}}
+                
+              </div>  
+                 <div class="col-sm-5"> 
+                   {{form1.cod_profesion_oficio|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+
+
+            
+
+            </div>
+            <h5>Direccion del domicilio:</h5><br>
+            <div class="row">
+              <div class="col-sm-5">
+              
+                {{form1.cod_departament_domicilio|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+
+                <div class="col-sm-5">
+               <label for="id_cod_municipio_domicilio" class="col-xs-5 control-label">Municipio Domicilio</label>
+                   <div class="col-xs-7">
+                      <select class="form-control" id="id_cod_municipio_domicilio" name="cod_municipio" required>
+                         <option value="">---------------</option> 
+                      </select>
+                   </div>                 
+              </div>
+              
+              </div><hr>
+         
+              <div class="col-sm-12">
+                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button> 
+                              
+              </div>
+
+
+        </div>                                   
+                     
+               
+      </form>
+
+                 
+     </div>
+                
+</div> 
+
+ <script>
+   
+    $('#id_fecha_nacimiento').datepicker({
+      autoclose: true,
+      format: 'dd-mm-yyyy',
+      language: 'es',
+    });
+
+
+    $('#id_cod_departament_domicilio').change(function(){
+      $('#id_cod_municipio_domicilio').empty();
+      $('#id_cod_municipio_domicilio').append("<option value=''>---------------</option>");
+       cod_departament_domicilio = $(this).val()
+       $.ajax({
+          type: "GET",
+          data: { cod_departament_domicilio: cod_departament_domicilio},
+          url: "{% url 'ajax2' %}",
+          success: function(response){
+           $.each(response, function(key, val){
+              $('#id_cod_municipio_domicilio').append("<option value="+val.cod_municipio+">" + val.desc_municipio + "</option>");
+            });
+              $('#id_cod_municipio_domicilio').trigger("chosen:updated");
+      }
+   });
+});
+ </script>
+{% endblock %}  
+     <!-- /.content -->
