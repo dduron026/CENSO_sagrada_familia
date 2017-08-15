@@ -490,7 +490,7 @@ def editar_ficha_1(request, cod_censo):
 				ficha.estado_civil = None if request.POST.get('estado_civil') == '' else request.POST.get('estado_civil')
 				ficha.apellido_de_casada = None if request.POST.get('apellido_de_casada') == '' else request.POST.get('apellido_de_casada')
 				ficha.cod_estado = Estados.objects.get(pk=0)
-				ficha.cod_vista = 1
+				ficha.cod_vista = 2
 				
 				ficha.save()
 				return redirect(reverse('editar_ficha_2', kwargs={'cod_censo': ficha.cod_censo}))
@@ -515,14 +515,19 @@ def editar_ficha_2(request, cod_censo):
 				ficha.cod_profesion_oficio = ProfesionOficio.objects.get(pk=request.POST.get('cod_profesion_oficio'))
 				ficha.cod_departament_domicilio = Departamentos.objects.get(pk=request.POST.get('cod_departament_domicilio'))
 				ficha.cod_municipio_domicilio = Municipios.objects.get(pk=request.POST.get('cod_municipio'))
-				ficha.cod_vista = 2			
+				ficha.cod_vista = 3		
 				ficha.save()
 				return redirect(reverse('editar_ficha_3', kwargs={'cod_censo': ficha.cod_censo}))
 			
 		except Exception as e:
 			mensaje = 'error'
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_2.html', {'form1': form1})	
+	return render(request, 'editar/editar_ficha_2.html', ctx)	
 
 
 def editar_ficha_3(request, cod_censo):
@@ -546,15 +551,20 @@ def editar_ficha_3(request, cod_censo):
 				ficha.telefono_otro_domicilio = None if request.POST.get('telefono_otro_domicilio') == '' else request.POST.get('telefono_otro_domicilio')
 				ficha.celular_domicilio = None if request.POST.get('celular_domicilio') == '' else request.POST.get('celular_domicilio')
 				ficha.correo_electronico_domicilio = None if request.POST.get('correo_electronico_domicilio') == '' else request.POST.get('correo_electronico_domicilio')
-				ficha.cod_vista = 3
+				ficha.cod_vista = 4
 	
 				ficha.save()
 				return redirect(reverse('editar_ficha_4', kwargs={'cod_censo': ficha.cod_censo}))
 			
 		except Exception as e:
 			mensaje = 'error'
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_3.html', {'form1': form1})	
+	return render(request, 'editar/editar_ficha_3.html', ctx)	
 
 
 
@@ -574,15 +584,20 @@ def editar_ficha_4(request, cod_censo):
 				ficha.nombres_conyuge = None if request.POST.get('nombres_conyuge') == '' else request.POST.get('nombres_conyuge')
 				ficha.primer_apellido_conyuge = None if request.POST.get('primer_apellido_conyuge') == '' else request.POST.get('primer_apellido_conyuge')
 				ficha.segundo_apellido_conyuge = None if request.POST.get('segundo_apellido_conyuge') == '' else request.POST.get('segundo_apellido_conyuge')
-				ficha.cod_vista = 4
+				ficha.cod_vista = 5
 	
 				ficha.save()
 				return redirect(reverse('editar_ficha_5', kwargs={'cod_censo': ficha.cod_censo}))
 			
 		except Exception as e:
 			mensaje = 'error'
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_4.html', {'form1': form1})	
+	return render(request, 'editar/editar_ficha_4.html', ctx)	
 
 
 
@@ -603,15 +618,20 @@ def editar_ficha_5(request, cod_censo):
 				ficha.nombres_conyuge = None if request.POST.get('nombres_conyuge') == '' else request.POST.get('nombres_conyuge')
 				ficha.primer_apellido_conyuge = None if request.POST.get('primer_apellido_conyuge') == '' else request.POST.get('primer_apellido_conyuge')
 				ficha.segundo_apellido_conyuge = None if request.POST.get('segundo_apellido_conyuge') == '' else request.POST.get('segundo_apellido_conyuge')
-				ficha.cod_vista = 5
+				ficha.cod_vista = 6
 	
 				ficha.save()
 				return redirect(reverse('editar_ficha_6', kwargs={'cod_censo': ficha.cod_censo}))
 			
 		except Exception as e:
-			raise e
+			mensaje = 'error'
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_5.html', {'form1': form1})
+	return render(request, 'editar/editar_ficha_5.html', ctx )
 
 
 
@@ -635,15 +655,21 @@ def editar_ficha_6(request, cod_censo):
 				ficha.telefono_otro_empresa = None if request.POST.get('telefono_otro_empresa') == '' else request.POST.get('telefono_otro_empresa')
 				ficha.celular_empresa = None if request.POST.get('celular_empresa') == '' else request.POST.get('celular_empresa')
 				ficha.correo_electronico_empresa = None if request.POST.get('correo_electronico_empresa') == '' else request.POST.get('correo_electronico_empresa')
-				ficha.cod_vista = 6
+				ficha.cod_vista = 7
 	
 				ficha.save()
 				return redirect(reverse('editar_ficha_7', kwargs={'cod_censo': ficha.cod_censo}))
 			
 		except Exception as e:
 			mensaje = 'error'
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_6.html', {'form1': form1})		
+	return render(request, 'editar/editar_ficha_6.html', ctx)		
 
 
 
@@ -667,15 +693,21 @@ def editar_ficha_7(request, cod_censo):
 				ficha.nivel_ingreso = None if request.POST.get('nivel_ingreso') == '' else request.POST.get('nivel_ingreso')
 				ficha.trabaja_conyuge = None if request.POST.get('trabaja_conyuge') == '' else request.POST.get('trabaja_conyuge')
 				ficha.nivel_ingreso_conyuge = None if request.POST.get('nivel_ingreso_conyuge') == '' else request.POST.get('nivel_ingreso_conyuge')
-				ficha.cod_vista = 7
+				ficha.cod_vista = 8
 	
 				ficha.save()
 				return redirect(reverse('editar_ficha_8', kwargs={'cod_censo': ficha.cod_censo}))
 			
 		except Exception as e:
 			mensaje = 'error'
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_7.html', {'form1': form1})
+	return render(request, 'editar/editar_ficha_7.html', ctx )
 
 
 
@@ -692,15 +724,21 @@ def editar_ficha_8(request, cod_censo):
 				ficha = FichaCenso.objects.get(cod_censo=cod_censo)
 				ficha.hijos = None if request.POST.get('hijos') == '' else request.POST.get('hijos')
 				ficha.cantidad_de_hijos = None if request.POST.get('cantidad_de_hijos') == '' else request.POST.get('cantidad_de_hijos')
-				ficha.cod_vista = 8	
+				ficha.cod_vista = 9
 	
 				ficha.save()
 				return redirect(reverse('editar_hijos', kwargs={'cod_censo': ficha.cod_censo, 'cantidad': ficha.cantidad_de_hijos}))
 			
 		except Exception as e:
 			mensaje = 'error'
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_8.html', {'form1': form1})		
+	return render(request, 'editar/editar_ficha_8.html', ctx )		
 
 
 
@@ -745,7 +783,7 @@ def editar_hijos(request, cod_censo, cantidad):
 					hijo.institucion_estudio = None if institucion_estudio[counter] == '' else institucion_estudio[counter]
 					hijo.institucion_trabajo = None if institucion_trabajo[counter] == '' else institucion_trabajo[counter]
 					hijo.sueldo = None if sueldo[counter] == '' else sueldo[counter]	
-					ficha.cod_vista = 9
+					ficha.cod_vista = 10
 					hijo.save()
 					counter += 1							
 				return redirect(reverse('editar_ficha_9', kwargs={'cod_censo': ficha.cod_censo}))		
@@ -753,6 +791,7 @@ def editar_hijos(request, cod_censo, cantidad):
 			mensaje = 'error'
 			
 	ctx = {	'form1': form1,
+			'ficha': ficha,
 			'hijos': hijos,
 			'cantidad': range(0,int(cantidad)),
 		}
@@ -780,15 +819,21 @@ def editar_ficha_9(request, cod_censo):
 				ficha.cantidad_personas = None if request.POST.get('cantidad_personas') == '' else request.POST.get('cantidad_personas')
 				ficha.numero_ninos = None if request.POST.get('numero_ninos') == '' else request.POST.get('numero_ninos')
 				ficha.numero_adolescentes = None if request.POST.get('numero_adolescentes') == '' else request.POST.get('numero_adolescentes')
-				ficha.cod_vista = 10
+				ficha.cod_vista = 11
 	
 				ficha.save()
 				return redirect(reverse('editar_ficha_10', kwargs={'cod_censo': ficha.cod_censo}))
 			
 		except Exception as e:
 			mensaje = 'error'
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_9.html', {'form1': form1})
+	return render(request, 'editar/editar_ficha_9.html', ctx )
 
 
 
@@ -810,22 +855,30 @@ def editar_ficha_10(request, cod_censo):
 				ficha.cod_filial_visita = Filiales.objects.get(pk=request.POST.get('cod_filial_visita'))
 				ficha.cursos_capacitaciones = None if request.POST.get('cursos_capacitaciones') == '' else request.POST.get('cursos_capacitaciones')
 				ficha.asambleas_sectoriales = None if request.POST.get('asambleas_sectoriales') == '' else request.POST.get('asambleas_sectoriales')
-				ficha.cod_vista = 11				
+				ficha.cod_vista = 12				
 	
 				ficha.save()
 				return redirect(reverse('editar_ficha_11', kwargs={'cod_censo': ficha.cod_censo}))
 			
 		except Exception as e:
 			raise e
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_10.html', {'form1': form1})
+	return render(request, 'editar/editar_ficha_10.html', ctx )
 
 
 
-def editar_ficha_11(request, cod_censo, cod_prestamos):
+def editar_ficha_11(request, cod_censo):
+	print 'PASOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
 	ficha = FichaCenso.objects.get(pk=cod_censo)
-	x = Prestamos.objects.filter(cod_prestamos=cod_prestamos)
-	
+
+	x = Prestamos.objects.filter(cod_censo=cod_censo)
+	prestamo = PrestamosForm()
 
 	if request.method == 'GET':
 		form1 = FichaCensoForm(instance=ficha)
@@ -833,43 +886,53 @@ def editar_ficha_11(request, cod_censo, cod_prestamos):
 		for prestamo in x:
 			prestamo = PrestamosForm(instance=prestamo)
 			prestamos.append(prestamo)
-		else:
-			form1 = FichaCensoForm(request.POST, instance=ficha)
-			
-			try:
-				with transaction.atomic():
-					ficha = FichaCenso.objects.get(cod_censo=cod_censo)
-					ficha.prestamos_otros = None if request.POST.get('prestamos_otros') == '' else request.POST.get('prestamos_otros')
-					ficha.tipo_institucion_prestamos = None if request.POST.get('tipo_institucion_prestamos') == '' else request.POST.get('tipo_institucion_prestamos')
-					ficha.cod_vista = 12
-					ficha.save()
+	else:
+		print 'HOLA COMO ESTASAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		form1 = FichaCensoForm(request.POST, instance=ficha)
+		
+		try:
+			with transaction.atomic():
+				ficha = FichaCenso.objects.get(cod_censo=cod_censo)
+				ficha.prestamos_otros = None if request.POST.get('prestamos_otros') == '' else request.POST.get('prestamos_otros')
+				ficha.tipo_institucion_prestamos = None if request.POST.get('tipo_institucion_prestamos') == '' else request.POST.get('tipo_institucion_prestamos')
+				ficha.cod_vista = 13
+				ficha.save()
 
-					institucion = request.POST.getlist('institucion[]')
-					tipo_prestamos = request.POST.getlist('tipo_prestamos[]')
-					moneda = request.POST.getlist('moneda[]')
-					tasa = request.POST.getlist('tasa[]')
-					monto_original = request.POST.getlist('monto_original[]')
-					plazo_meses = request.POST.getlist('plazo_meses[]')
+				institucion = request.POST.getlist('institucion[]')
+				tipo_prestamos = request.POST.getlist('tipo_prestamos[]')
+				moneda = request.POST.getlist('moneda[]')
+				tasa = request.POST.getlist('tasa[]')
+				monto_original = request.POST.getlist('monto_original[]')
+				plazo_meses = request.POST.getlist('plazo_meses[]')
 
-					prestamo = Prestamos.objects.filter(cod_censo=cod_censo).delete()
-					counter = 0
-					for x in institucion:
-						prestamo = Prestamos()
-						prestamo.cod_censo = FichaCenso.objects.get(pk=cod_censo)
-						prestamo.institucion = None if institucion[counter] == '' else institucion[counter]
-						prestamo.tipo_prestamos = None if tipo_prestamos[counter] == '' else tipo_prestamos[counter]
-						prestamo.moneda = None if moneda[counter] == '' else moneda[counter]
-						prestamo.tasa = None if tasa[counter] == '' else tasa[counter]
-						prestamo.monto_original = None if monto_original[counter] == '' else monto_original[counter]
-						prestamo.plazo_meses = None if plazo_meses[counter] == '' else plazo_meses[counter]
+				prestamo = Prestamos.objects.filter(cod_censo=cod_censo).delete()
+				counter = 0
+				for x in institucion:
+					prestamo = Prestamos()
+					prestamo.cod_censo = FichaCenso.objects.get(pk=cod_censo)
+					prestamo.institucion = None if institucion[counter] == '' else institucion[counter]
+					prestamo.tipo_prestamos = None if tipo_prestamos[counter] == '' else tipo_prestamos[counter]
+					prestamo.moneda = None if moneda[counter] == '' else moneda[counter]
+					prestamo.tasa = None if tasa[counter] == '' else tasa[counter]
+					prestamo.monto_original = None if monto_original[counter] == '' else monto_original[counter]
+					prestamo.plazo_meses = None if plazo_meses[counter] == '' else plazo_meses[counter]
 
-						prestamo.save()
-						counter += 1
+					prestamo.save()
+					counter += 1
 
-					return redirect(reverse('editar_ficha_12', kwargs={'cod_censo': ficha.cod_censo}))				
-			except Exception as e:
-				raise e
-	return render(request, 'editar_ficha_11.html', {'form1': form1, 'prestamos': prestamos})	
+				return redirect(reverse('editar_ficha_12', kwargs={'cod_censo': ficha.cod_censo}))				
+		except Exception as e:
+			raise e
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha,
+	'prestamos': prestamos,
+	'prestamo': prestamo,
+
+	}
+
+	return render(request, 'editar/editar_ficha_11.html', ctx )
 
 
 
@@ -893,7 +956,7 @@ def editar_ficha_12(request, cod_censo):
 				ficha.cantidad_tarjetas = None if request.POST.get('cantidad_tarjetas') == '' else request.POST.get('cantidad_tarjetas')
 				ficha.nombre_institucion_tarjeta = None if request.POST.get('nombre_institucion_tarjeta') == '' else request.POST.get('nombre_institucion_tarjeta')
 				ficha.tipo_tarjeta = None if request.POST.get('tipo_tarjeta') == '' else request.POST.get('tipo_tarjeta')
-				ficha.cod_vista = 13				
+				ficha.cod_vista = 14				
 				
 	
 				ficha.save()
@@ -901,8 +964,14 @@ def editar_ficha_12(request, cod_censo):
 			
 		except Exception as e:
 			mensaje = 'error'
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_12.html', {'form1': form1})	
+	return render(request, 'editar/editar_ficha_12.html', ctx )	
 
 
 
@@ -922,15 +991,21 @@ def editar_ficha_13(request, cod_censo):
 				ficha.nombre_institucion_casa = None if request.POST.get('nombre_institucion_casa') == '' else request.POST.get('nombre_institucion_casa')
 				ficha.sistema_cable = None if request.POST.get('sistema_cable') == '' else request.POST.get('sistema_cable')
 				ficha.internet = None if request.POST.get('internet') == '' else request.POST.get('internet')
-				ficha.cod_vista = 14			
+				ficha.cod_vista = 15		
 	
 				ficha.save()
 				return redirect(reverse('editar_ficha_14', kwargs={'cod_censo': ficha.cod_censo}))
 			
 		except Exception as e:
 			mensaje = 'error'
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_13.html', {'form1': form1})	
+	return render(request, 'editar/editar_ficha_13.html', ctx )	
 
 
 
@@ -953,15 +1028,21 @@ def editar_ficha_14(request, cod_censo):
 				ficha.empresa_remesas = None if request.POST.get('empresa_remesas') == '' else request.POST.get('empresa_remesas')	
 				ficha.cada_cuanto_recibe = None if request.POST.get('cada_cuanto_recibe') == '' else request.POST.get('cada_cuanto_recibe')	
 				ficha.promedio_remesas = None if request.POST.get('promedio_remesas') == '' else request.POST.get('promedio_remesas')	
-				ficha.cod_vista = 15	
+				ficha.cod_vista = 16	
 	
 				ficha.save()
 				return redirect(reverse('editar_ficha_15', kwargs={'cod_censo': ficha.cod_censo}))				
 			
 		except Exception as e:
 			mensaje = 'error'
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_14.html', {'form1': form1})		
+	return render(request, 'editar/editar_ficha_14.html', ctx )		
 		
 
 
@@ -982,7 +1063,7 @@ def editar_ficha_15(request, cod_censo):
 				ficha.municipio_encuesta = Municipios.objects.get(pk=request.POST.get('cod_municipio')) #el atributo 'name' del elemento <select>
 				ficha.filial_encuesta = Filiales.objects.get(pk=request.POST.get('filial_encuesta'))
 				ficha.cod_estado = Estados.objects.get(pk=1)
-				ficha.cod_vista = 16				
+				ficha.cod_vista = 17				
 	
 	
 				ficha.save()
@@ -990,8 +1071,14 @@ def editar_ficha_15(request, cod_censo):
 			
 		except Exception as e:
 			mensaje = 'error'
+
+	ctx = {
+	'form1': form1,
+	'ficha': ficha
+
+	}			
 		
-	return render(request, 'editar/editar_ficha_15.html', {'form1': form1})		
+	return render(request, 'editar/editar_ficha_15.html', ctx )		
 
 
 
@@ -1022,4 +1109,22 @@ def ajax_municipioEncuesta(request):
 		departamento_encuesta = request.GET['departamento_encuesta']
 		data = list(Municipios.objects.values('cod_municipio', 'desc_municipio').filter(cod_departamento=departamento_encuesta))
 		return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+def atras_1(request, cod_censo):
+	ficha = FichaCenso.objects.get(pk=cod_censo)
+	
+	if request.method == 'GET':
+		form1 = FichaCensoForm(instance=ficha)
+
+	# else:
+	# 	form1 = FichaCensoForm(request.POST, instance=ficha)
+	# 	try:
+	# 		with transaction.atomic():
+	# 			ficha = FichaCenso.objects.get(cod_censo=cod_censo)			
+			
+	# 	except Exception as e:
+	# 		raise e
+		
+	return render(request, 'editar/editar_ficha_1.html', {'form1': form1})	
 

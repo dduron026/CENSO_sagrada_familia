@@ -82,6 +82,10 @@ DATABASES = {
         'HOST': 'DESKTOP-SF88S2C',
         'USER': '',
         'PASSWORD': '',
+        'OPTIONS': {
+                   'unicode_results': True, 
+                   'extra_params': 'tds_version=8.0'
+               },
 
     }
 }

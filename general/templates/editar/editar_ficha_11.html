@@ -57,30 +57,30 @@
 
             <div class="row">
               <div class="col-sm-5">
-                {{prestamos.institucion|bootstrap_horizontal:'col-xs-5'}}
+                {{prestamo.institucion|bootstrap_horizontal:'col-xs-5'}}
               </div>
               <div class="col-sm-5">
-                {{prestamos.tipo_prestamos|bootstrap_horizontal:'col-xs-5'}}
+                {{prestamo.tipo_prestamos|bootstrap_horizontal:'col-xs-5'}}
               </div> 
               </div>     
 
 
             <div class="row">
               <div class="col-sm-5">
-                {{prestamos.moneda|bootstrap_horizontal:'col-xs-5'}}
+                {{prestamo.moneda|bootstrap_horizontal:'col-xs-5'}}
               </div>
               <div class="col-sm-5">
-                {{prestamos.tasa|bootstrap_horizontal:'col-xs-5'}}
+                {{prestamo.tasa|bootstrap_horizontal:'col-xs-5'}}
               </div>          
             </div>
 
 
             <div class="row">
               <div class="col-sm-5">
-                {{prestamos.monto_original|bootstrap_horizontal:'col-xs-5'}}
+                {{prestamo.monto_original|bootstrap_horizontal:'col-xs-5'}}
               </div>
               <div class="col-sm-5">
-                {{prestamos.plazo_meses|bootstrap_horizontal:'col-xs-5'}}
+                {{prestamo.plazo_meses|bootstrap_horizontal:'col-xs-5'}}
               </div>
               <div class="col-sm-2">
                 <button type="button" class="btn btn-danger pull-right eliminar">Eliminar</button>
@@ -117,13 +117,51 @@
             </div><hr>         
 
                 <!-- en este div se ingresan los otros con jquery -->
-                <div id="otros_prestamos"> </div>
+            <div id="otros_prestamos">
+                 {% for prestamo in prestamos %}
+                 <div class="row">
+              <div class="col-sm-5">
+                {{prestamo.institucion|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-5">
+                {{prestamo.tipo_prestamos|bootstrap_horizontal:'col-xs-5'}}
+              </div> 
+              </div>     
+
+
+            <div class="row">
+              <div class="col-sm-5">
+                {{prestamo.moneda|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-5">
+                {{prestamo.tasa|bootstrap_horizontal:'col-xs-5'}}
+              </div>          
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-5">
+                {{prestamo.monto_original|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-5">
+                {{prestamo.plazo_meses|bootstrap_horizontal:'col-xs-5'}}
+              </div>
+              <div class="col-sm-2">
+                <button type="button" class="btn btn-danger pull-right eliminar">Eliminar</button>
+              </div>
+            
+            </div><hr>
+
+
+                {% endfor %}
+
+                 </div>
 
 
               <div class="col-sm-12">
-                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button>
-                             
-              </div>
+                  <a href="{% url 'editar_ficha_10' ficha.cod_censo  %}" class="btn btn-primary btn-large"><i class="glyphicon glyphicon-arrow-left"></i> Atrás</a>
+                  <button type="submit" class="btn btn-success btn-md pull-right " id='btn-guardar'> Siguiente <i class="glyphicon glyphicon-arrow-right" ></i></button>
+                </div>
 
 
         </div>                                   

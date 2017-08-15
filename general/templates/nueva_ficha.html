@@ -57,18 +57,6 @@
     position: relative;
   }
 
- /*para efecto de flecha*/
-/*.error:before{ 
-    content: '';
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-right: 8px solid #BC1010;
-    border-left: 8px solid transparent;
-    left: -16px;
-    position: absolute;
-    top: 5px;
-  }  
-*/
 
 
 </style>
@@ -88,7 +76,8 @@
             <div class="row">
               <div class="col-sm-5">
                  {{form1.identidad|bootstrap_horizontal:'col-xs-5'}}
-              </div>
+              </div> 
+            
                <div class="col-sm-5">
                  {{form1.fecha_nacimiento|bootstrap_horizontal:'col-xs-5'}}
               </div>              
@@ -156,7 +145,7 @@
 
 
               <div class="col-sm-12">
-                 <button type="submit" class="btn btn-success btn-md pull-right" id='btn-guardar'><i class="" ></i> Siguiente</button>             
+                 <button type="submit" class="btn btn-success btn-md pull-right " id='btn-guardar'> Siguiente <i class="glyphicon glyphicon-arrow-right" ></i></button>             
                
              </div>
 

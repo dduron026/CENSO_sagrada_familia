@@ -44,11 +44,10 @@ urlpatterns = [
 	url(r'^editar/editar_hijos/(?P<cod_censo>\d+)/(?P<cantidad>\d+)$', views.editar_hijos, name='editar_hijos'),
 	url(r'^editar/editar_ficha_9/(?P<cod_censo>\d+)$', views.editar_ficha_9, name='editar_ficha_9'),
 	url(r'^editar/editar_ficha_10/(?P<cod_censo>\d+)$', views.editar_ficha_10, name='editar_ficha_10'),
-	url(r'^editar/editar_ficha_11/(?P<cod_censo>\d+)/(?P<cod_prestamos>\d+)$', views.editar_ficha_11, name='editar_ficha_11'),
+	url(r'^editar/editar_ficha_11/(?P<cod_censo>\d+)$', views.editar_ficha_11, name='editar_ficha_11'),
 	url(r'^editar/editar_ficha_12/(?P<cod_censo>\d+)$', views.editar_ficha_12, name='editar_ficha_12'),
 	url(r'^editar/editar_ficha_13/(?P<cod_censo>\d+)$', views.editar_ficha_13, name='editar_ficha_13'),
 	url(r'^editar/editar_ficha_14/(?P<cod_censo>\d+)$', views.editar_ficha_14, name='editar_ficha_14'),
 	url(r'^editar/editar_ficha_15/(?P<cod_censo>\d+)$', views.editar_ficha_15, name='editar_ficha_15'),
-	
 	  
 ]
