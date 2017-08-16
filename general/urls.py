@@ -12,6 +12,7 @@ urlpatterns = [
 	url(r'^ajax_municipioEncuesta/$', views.ajax_municipioEncuesta, name='ajax_municipioEncuesta'),
 	url(r'^$', views.menu_principal, name='menu_principal'),
 	url(r'^nueva_ficha/', views.nueva_ficha, name='nueva_ficha'),
+	url(r'^usuario_ingreso/', views.usuario_ingreso, name='usuario_ingreso'),
 	
 	url(r'^listado_ficha/', views.listado_ficha, name='listado_ficha'),
 

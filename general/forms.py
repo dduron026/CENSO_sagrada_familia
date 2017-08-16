@@ -4,6 +4,7 @@ from django.forms.widgets import *
 from django import forms
 from general.models import *
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User, Group
 
 GENERO = (
 	('M', 'Masculino'),
@@ -439,6 +440,26 @@ class ProfesionOficioForm(ModelForm):
 		labels = {
 				'desc_profesion':('Profesión u oficio'),
 				}
+
+
+class UserForm(ModelForm):
+	class Meta:
+		model = User
+		fields = "__all__"
+		exclude = []
+		labels = {}		
+
+
+class GroupForm(ModelForm):
+	class Meta:
+		model = Group
+		fields = "__all__"
+		exclude = []
+		labels = {}		
+
+
+
+
 
 
 

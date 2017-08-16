@@ -65,21 +65,30 @@
           
           <form method="post" accept-charset="utf-8" id="formulario" class="form-horizontal" enctype='multipart/form-data' >
             {% csrf_token %}
-          
 
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label" >Usuario</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="usuario" placeholder="Ingrese el usuario" name="usuario">
+                </div>
 
-     
+            </div>
 
+            <div class="form-group">
+              <label for="" class="col-sm-2 control-label">Rol del Usuario</label>
+              <div class="col-sm-4">
+                  <select class="form-control" name='grupo'>
+                    {% for grupo in grupos %}
+                      <option value="{{grupo.id}}" > {{grupo}} </option>
+                    {% endfor %}
+                  </select>
+              </div>
+            </div>
 
-            </div>                                   
-           
-                            
+            <button class="btn btn-success col-sm-offset-2">Guardar Usuario</button>                 
                
-      </form>
-
-                 
-     </div>
-                
+          </form>                 
+     </div>                
 </div> 
 
  

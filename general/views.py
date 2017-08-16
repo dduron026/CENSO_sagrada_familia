@@ -9,9 +9,41 @@ from django.shortcuts import render, redirect
 from django.http import *
 from django.template import RequestContext
 from django.urls import reverse
+from django.contrib.auth.models import User, Group
 
 from general.forms import *
 from .models import * 
+
+
+def usuario_ingreso(request):
+	grupos = Group.objects.all()
+	mensaje = ''
+
+	if request.POST:
+		username = request.POST['usuario']
+		grupo = request.POST['grupo']
+
+		try:
+			User.objects.get(username=username)
+			mensaje = 'error'			
+		except Exception as e:
+
+			usuario = User()
+			usuario.username = username
+			usuario.is_staff = False
+			usuario.save()
+
+			g = Group.objects.get(id=grupo) 
+			g.user_set.add(usuario)
+			mensaje = 'exito'
+
+
+	ctx = {
+	'grupos': grupos,
+	'mensaje': mensaje
+	}
+
+	return render(request, 'usuario_ingreso.html', ctx)
 
 
 
