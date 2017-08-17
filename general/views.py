@@ -1143,20 +1143,4 @@ def ajax_municipioEncuesta(request):
 		return HttpResponse(json.dumps(data), content_type='application/json')
 
 
-def atras_1(request, cod_censo):
-	ficha = FichaCenso.objects.get(pk=cod_censo)
-	
-	if request.method == 'GET':
-		form1 = FichaCensoForm(instance=ficha)
-
-	# else:
-	# 	form1 = FichaCensoForm(request.POST, instance=ficha)
-	# 	try:
-	# 		with transaction.atomic():
-	# 			ficha = FichaCenso.objects.get(cod_censo=cod_censo)			
-			
-	# 	except Exception as e:
-	# 		raise e
-		
-	return render(request, 'editar/editar_ficha_1.html', {'form1': form1})	
 
