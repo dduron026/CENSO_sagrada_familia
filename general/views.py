@@ -801,6 +801,7 @@ def editar_hijos(request, cod_censo, cantidad):
 				sueldo = request.POST.getlist('sueldo[]')
 				
 				hijo = Hijos.objects.filter(cod_censo=cod_censo).delete()
+				
 				# borro los registros y los vuelvo a crear
 				counter = 0
 				for x in nombre_hijo:				

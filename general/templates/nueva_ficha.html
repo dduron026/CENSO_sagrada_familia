@@ -139,9 +139,7 @@
                <div class="col-sm-5">
                  {{form1.numero_afiliado|bootstrap_horizontal:'col-xs-5'}}
               </div>              
-            </div><hr>
-
-            
+            </div><hr>           
 
 
               <div class="col-sm-12">
@@ -164,9 +162,7 @@
  <script>
 
   $(document).ready(function () {
-
-
-    // var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+    
 
     $('input[name=estado_civil], input[name=genero]').change(function(){
       if ($('input[name=estado_civil]:checked').val() == 'B' && $('input[name=genero]:checked').val() == 'F' ) {
@@ -175,7 +171,7 @@
         $('#id_apellido_casada').hide()
 
       }
-      console.log($('input[name=estado_civil]:checked').val(), $('input[name=genero]:checked').val(), 'aaa')
+      // console.log($('input[name=estado_civil]:checked').val(), $('input[name=genero]:checked').val(), 'aaa')
     })
 
 
