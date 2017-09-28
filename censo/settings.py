@@ -89,6 +89,17 @@ DATABASES = {
 
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'USER': 'mydatabaseuser',
+#         'PASSWORD': '',
+#         'NAME': 'mydatabase',
+#         'TEST': {
+#             'NAME': '',
+#         },
+#     },
+# }
 
 
 # Password validation

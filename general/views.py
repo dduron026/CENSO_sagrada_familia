@@ -907,7 +907,7 @@ def editar_ficha_10(request, cod_censo):
 
 
 def editar_ficha_11(request, cod_censo):
-	print 'PASOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
+	
 	ficha = FichaCenso.objects.get(pk=cod_censo)
 
 	x = Prestamos.objects.filter(cod_censo=cod_censo)
@@ -920,7 +920,7 @@ def editar_ficha_11(request, cod_censo):
 			prestamo = PrestamosForm(instance=prestamo)
 			prestamos.append(prestamo)
 	else:
-		print 'HOLA COMO ESTASAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		
 		form1 = FichaCensoForm(request.POST, instance=ficha)
 		
 		try:
